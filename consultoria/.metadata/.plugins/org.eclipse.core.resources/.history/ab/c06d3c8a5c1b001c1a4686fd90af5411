@@ -1,0 +1,5 @@
+package br.com.mattec.consul.entities;
+
+public class ClientEndereco {
+
+}

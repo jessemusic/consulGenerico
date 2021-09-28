@@ -1,0 +1,10 @@
+package br.com.mattec.consul.entities;
+
+public class ClientEndereco {
+	
+//	
+//	@Column(name="client_id")
+//	private Long client;
+//	@Column(name="endereco_id")
+//	private Long endereco;
+}
