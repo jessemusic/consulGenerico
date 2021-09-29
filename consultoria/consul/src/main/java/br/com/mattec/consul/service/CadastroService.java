@@ -15,7 +15,7 @@ import br.com.mattec.consul.reporitory.ClientRepository;
 
 @Service
 public class CadastroService {
-	
+
 	@Autowired
 	private CepClient cepClient;
 
@@ -37,8 +37,9 @@ public class CadastroService {
 			client.setEndereco(cep.get());
 			this.clientService.insert(client);
 		} else {
-			Endereco endereco = Endereco.builder().cep(cadDto.getCep()).logradouro(cadDto.getLogradouro())
-					.bairro(cadDto.getBairro()).localidade(cadDto.getLocalidade()).uf(cadDto.getUf()).build();
+			Endereco endereco = Endereco.builder().cep(cadDto.getCep().replace("-", ""))
+					.logradouro(cadDto.getLogradouro()).bairro(cadDto.getBairro()).localidade(cadDto.getLocalidade())
+					.uf(cadDto.getUf()).build();
 			client.setEndereco(endereco);
 			this.clientService.insert(client);
 			this.enderecoService.insert(endereco);
@@ -48,34 +49,30 @@ public class CadastroService {
 
 	public void update(CadastraDto upDto) {
 		Optional<Client> clientAtual = clientRepository.findByCpf(upDto.getCpf());
+
 		if (clientAtual.isPresent()) {
-			 clientAtual.get().setNome(upDto.getNome());
-			 clientAtual.get().setCpf(upDto.getCpf());
-			 clientAtual.get().setNumeroEndereco(upDto.getNumeroEndereco());
-			 clientAtual.get().setComplemento(upDto.getComplemento());
-			 
-			 Optional<Endereco> cep = enderecoService.findByCep(upDto.getCep());
+			clientAtual.get().setNome(upDto.getNome());
+			clientAtual.get().setCpf(upDto.getCpf());
+			clientAtual.get().setNumeroEndereco(upDto.getNumeroEndereco());
+			clientAtual.get().setComplemento(upDto.getComplemento());
 
-				if (cep.isPresent()) {
-					clientAtual.get().setEndereco(cep.get());
-					this.clientService.insert(clientAtual.get());
-				}else {
+			Optional<Endereco> cep = enderecoService.findByCep(upDto.getCep());
 
-					ResponseEntity<EnderecoDto> endereco = this.cepClient.getCep(upDto.getCep());
-					Endereco enderecoAtual = Endereco.builder()
-							.cep(endereco.getBody().getCep())
-							.logradouro(endereco.getBody().getLogradouro())
-							.complemento(endereco.getBody().getComplemento())
-							.bairro(endereco.getBody().getBairro())
-							.localidade(endereco.getBody().getLocalidade())
-							.uf(endereco.getBody().getUf()).build();
-					this.enderecoService.insert(enderecoAtual);
-					clientAtual.get().setEndereco(enderecoAtual);
-					this.clientService.insert(clientAtual.get());
-				}
+			if (cep.isPresent()) {
+				clientAtual.get().setEndereco(cep.get());
+				this.clientService.insert(clientAtual.get());
+			} else {
 
+				ResponseEntity<EnderecoDto> endereco = this.cepClient.getCep(upDto.getCep());
+
+				Endereco enderecoAtual = Endereco.builder().cep(endereco.getBody().getCep().replace("-", ""))
+						.logradouro(endereco.getBody().getLogradouro()).complemento(endereco.getBody().getComplemento())
+						.bairro(endereco.getBody().getBairro()).localidade(endereco.getBody().getLocalidade())
+						.uf(endereco.getBody().getUf()).build();
+				this.enderecoService.insert(enderecoAtual);
+				clientAtual.get().setEndereco(enderecoAtual);
+				this.clientService.insert(clientAtual.get());
+			}
 		}
-		
 	}
-
 }

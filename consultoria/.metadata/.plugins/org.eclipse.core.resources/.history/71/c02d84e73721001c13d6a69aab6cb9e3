@@ -1,0 +1,29 @@
+package br.com.mattec.consul.verify;
+
+public class RetiraTracoDoCep {
+
+	public static void main(String[] args) {
+		
+		
+		String volta = retiraTraco("01110120");
+		
+		System.out.println(volta);
+		
+	}
+
+	public static String retiraTraco(String cepComTraco) {
+		if(cepComTraco.contains("-")) {
+
+		String[] split = cepComTraco.split("-", 0);
+		String cepSemTraco = "";
+		for (String cp : split) {
+			cepSemTraco += cp;
+		}
+
+		return cepSemTraco;
+		}else {
+			return cepComTraco;
+		}
+		
+	}
+}
