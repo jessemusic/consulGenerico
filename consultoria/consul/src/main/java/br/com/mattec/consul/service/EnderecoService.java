@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Endereco;
-import br.com.mattec.consul.entities.client.ClientCep;
+import br.com.mattec.consul.entities.client.CepClient;
 import br.com.mattec.consul.reporitory.EnderecoRepository;
 
 @Service
 public class EnderecoService {
 
 	@Autowired
-	private ClientCep clientService;
+	private CepClient clientService;
 
 	@Autowired
 	public EnderecoRepository enderecoRepository;

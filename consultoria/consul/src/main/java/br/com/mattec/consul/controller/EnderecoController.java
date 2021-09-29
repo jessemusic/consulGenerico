@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Endereco;
 import br.com.mattec.consul.service.EnderecoService;

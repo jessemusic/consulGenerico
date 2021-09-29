@@ -37,7 +37,7 @@ public class Client implements Serializable{
 	@Column(nullable = false)
 	private String nome;
 	
-	
+	@Column(unique = true)
 	private String cpf;
 	
 	private String numeroEndereco;

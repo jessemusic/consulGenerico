@@ -3,16 +3,21 @@ package br.com.mattec.consul.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.mattec.consul.dto.AtualizaDto;
 import br.com.mattec.consul.dto.CadastraDto;
+import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.entities.Endereco;
+import br.com.mattec.consul.entities.client.CepClient;
 import br.com.mattec.consul.reporitory.ClientRepository;
 
 @Service
 public class CadastroService {
+	
+	@Autowired
+	private CepClient cepClient;
 
 	@Autowired
 	private ClientService clientService;
@@ -41,16 +46,34 @@ public class CadastroService {
 
 	}
 
-	public void update(AtualizaDto upDto) {
-		Optional<Client> clientId = clientRepository.findById(upDto.getId());
-		if (clientId.isPresent()) {
-			Client clientAtual = Client.builder().nome(upDto.getNome()).cpf(upDto.getCpf())
-					.numeroEndereco(upDto.getNumeroEndereco()).complemento(upDto.getComplemento()).build();
-			Endereco enderecoAtual = Endereco.builder().cep(upDto.getCep()).logradouro(upDto.getLogradouro())
-					.bairro(upDto.getBairro()).localidade(upDto.getLocalidade()).uf(upDto.getUf()).build();
-			clientAtual.setEndereco(enderecoAtual);
-			this.clientService.insert(clientAtual);
-			this.enderecoService.insert(enderecoAtual);
+	public void update(CadastraDto upDto) {
+		Optional<Client> clientAtual = clientRepository.findByCpf(upDto.getCpf());
+		if (clientAtual.isPresent()) {
+			 clientAtual.get().setNome(upDto.getNome());
+			 clientAtual.get().setCpf(upDto.getCpf());
+			 clientAtual.get().setNumeroEndereco(upDto.getNumeroEndereco());
+			 clientAtual.get().setComplemento(upDto.getComplemento());
+			 
+			 Optional<Endereco> cep = enderecoService.findByCep(upDto.getCep());
+
+				if (cep.isPresent()) {
+					clientAtual.get().setEndereco(cep.get());
+					this.clientService.insert(clientAtual.get());
+				}else {
+
+					ResponseEntity<EnderecoDto> endereco = this.cepClient.getCep(upDto.getCep());
+					Endereco enderecoAtual = Endereco.builder()
+							.cep(endereco.getBody().getCep())
+							.logradouro(endereco.getBody().getLogradouro())
+							.complemento(endereco.getBody().getComplemento())
+							.bairro(endereco.getBody().getBairro())
+							.localidade(endereco.getBody().getLocalidade())
+							.uf(endereco.getBody().getUf()).build();
+					this.enderecoService.insert(enderecoAtual);
+					clientAtual.get().setEndereco(enderecoAtual);
+					this.clientService.insert(clientAtual.get());
+				}
+
 		}
 		
 	}

@@ -6,10 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.mattec.consul.dto.AtualizaDto;
 import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.entities.Client;
-import br.com.mattec.consul.entities.Endereco;
 import br.com.mattec.consul.reporitory.ClientRepository;
 
 @Service
@@ -35,6 +33,12 @@ public class ClientService {
 	public List<CadastraDto> findAllClientEnderecoOne(String rua){
 		return this.clientRepository.findAllClientEnderecoOne(rua);
 	}
+	
+	public Optional<CadastraDto> findbyCpfOne(String cpf) {
+		return this.clientRepository.findbyCpfOne(cpf);
+	}
+	
+	
 	
 	
 	
