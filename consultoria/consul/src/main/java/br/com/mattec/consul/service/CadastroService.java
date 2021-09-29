@@ -31,12 +31,13 @@ public class CadastroService {
 	public void insert(CadastraDto cadDto) {
 		Client client = Client.builder().nome(cadDto.getNome()).cpf(cadDto.getCpf())
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
-		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep());
+		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
 
 		if (cep.isPresent()) {
 			client.setEndereco(cep.get());
 			this.clientService.insert(client);
 		} else {
+			
 			Endereco endereco = Endereco.builder().cep(cadDto.getCep().replace("-", ""))
 					.logradouro(cadDto.getLogradouro()).bairro(cadDto.getBairro()).localidade(cadDto.getLocalidade())
 					.uf(cadDto.getUf()).build();

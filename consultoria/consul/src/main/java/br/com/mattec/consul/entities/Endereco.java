@@ -34,7 +34,9 @@ public class Endereco  implements Serializable{
 	@Column(name = "id")
 	private Long id;
 	
+	@Column(unique = true)
 	private String cep;
+	
 	
 	private String logradouro;
 	

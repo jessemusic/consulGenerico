@@ -33,5 +33,4 @@ public class CadastraDto implements Serializable{
 	private String localidade;
 	
 	private String uf;
-
 }
