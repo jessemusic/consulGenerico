@@ -4,7 +4,7 @@ public class ValidaException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
 	public ValidaException(Object id) {
-		super("Atenção --> " + id);
+		super("Algo errado " + id);
 	}
 	
 }
