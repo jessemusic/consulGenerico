@@ -38,7 +38,7 @@ public class CadastroService {
 		if (temCpfNoBanco.isPresent()) 	throw new ValidaException("CPF já cadastrado");
 		
 		try {
-			if(cep.isPresent() && temCpfNoBanco.isPresent()) throw new ValidaException("O cep para está cpf já está"
+			if(cep.isPresent() && temCpfNoBanco.isPresent()) throw new ValidaException("O cep para o cpf indicado, já está"
 					+ " cadastrado no sistema!");
 			
 		if (cep.isPresent()) {
