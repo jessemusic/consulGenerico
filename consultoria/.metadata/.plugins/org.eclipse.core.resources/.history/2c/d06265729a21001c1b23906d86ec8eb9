@@ -1,0 +1,23 @@
+package br.com.mattec.consul.controller.exceptions;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import br.com.mattec.consul.service.exception.ValidaException;
+
+@ControllerAdvice
+public class ValidaExceptionHandler {
+	
+	@ExceptionHandler(ValidaException.class)
+	public ResponseEntity<StandardError> ValidaException(ValidaException e, HttpServletRequest request){
+		
+		String error = "ValidaException não encontrado!";
+		HttpStatus status =
+		
+	}
+
+}

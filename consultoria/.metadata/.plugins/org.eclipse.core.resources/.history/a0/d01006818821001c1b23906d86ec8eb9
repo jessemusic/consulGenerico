@@ -1,0 +1,5 @@
+package br.com.mattec.consul.exception;
+
+public class ValidaException {
+
+}

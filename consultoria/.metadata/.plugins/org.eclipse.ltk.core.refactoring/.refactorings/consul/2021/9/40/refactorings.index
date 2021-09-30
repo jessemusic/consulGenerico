@@ -2,3 +2,6 @@
 1632884021641	Rename type 'ClientCep'
 1632930954536	Delete element
 1632930960172	Delete element
+1632962711797	Delete element
+1632964717870	Rename package 'br.com.mattec.consul.exception'
+1632970277042	Rename package 'br.com.mattec.consul.controller.valida.exeptions'

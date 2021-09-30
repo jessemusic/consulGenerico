@@ -18,6 +18,7 @@ import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.service.CadastroService;
 import br.com.mattec.consul.service.ClientService;
+import br.com.mattec.consul.service.exception.ValidaException;
 
 @RestController
 @RequestMapping("/client")
@@ -30,7 +31,7 @@ public class ClientController {
 	private ClientService cliService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<Void> save(@RequestBody CadastraDto obj){
+	public ResponseEntity<Void> save(@RequestBody CadastraDto obj) throws ValidaException{
 		this.service.insert(obj);
 		return ResponseEntity.ok().build();
 	

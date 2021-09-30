@@ -12,6 +12,7 @@ import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.entities.Endereco;
 import br.com.mattec.consul.entities.client.CepClient;
 import br.com.mattec.consul.reporitory.ClientRepository;
+import br.com.mattec.consul.service.exception.ValidaException;
 
 @Service
 public class CadastroService {
@@ -28,14 +29,19 @@ public class CadastroService {
 	@Autowired
 	private ClientRepository clientRepository;
 
-	public void insert(CadastraDto cadDto) {
+	public void insert(CadastraDto cadDto)  throws ValidaException {
 		Client client = Client.builder().nome(cadDto.getNome()).cpf(cadDto.getCpf())
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
-		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep());
+		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
 		Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
+		try {
+		if (temCpfNoBanco.isPresent()) 	throw new ValidaException("CPF já cadastrado");
 		
-		if (temCpfNoBanco.isPresent()) throw new IllegalArgumentException("O cpf já existe");
-		if (cep.isPresent() && (!temCpfNoBanco.isPresent())) {
+		try {
+			if(cep.isPresent() && temCpfNoBanco.isPresent()) throw new ValidaException("O cep para está cpf já está"
+					+ " cadastrado no sistema!");
+			
+		if (cep.isPresent()) {
 			client.setEndereco(cep.get());
 			this.clientService.insert(client);
 		} else {
@@ -47,8 +53,18 @@ public class CadastroService {
 			this.clientService.insert(client);
 			this.enderecoService.insert(endereco);
 		}
+		}catch (ValidaException e) {
+			System.out.println("Verifique se digitou corretamente : " + e);	
+		}
+		} catch (ValidaException es) {
+			System.out.println("Verifique se digitou corretamente, novamente! " + es);
+			
+		}
 
+		
 	}
+
+	
 
 	public void update(CadastraDto upDto) {
 		Optional<Client> clientAtual = clientRepository.findByCpf(upDto.getCpf());

@@ -1,0 +1,18 @@
+package br.com.mattec.consul.controller.exceptions;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+import br.com.mattec.consul.service.exception.ValidaException;
+
+@ControllerAdvice
+public class ValidaExceptionHandler {
+	
+	public ResponseEntity<StandardError> ValidaException(ValidaException e, HttpServletRequest request){
+		
+		
+	}
+
+}

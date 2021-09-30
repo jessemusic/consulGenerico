@@ -1,0 +1,8 @@
+package br.com.mattec.consul.controller.exceptions;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+@ControllerAdvice
+public class ValidaExceptionHandler {
+
+}

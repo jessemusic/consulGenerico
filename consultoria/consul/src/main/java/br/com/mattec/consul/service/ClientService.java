@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.reporitory.ClientRepository;
+import br.com.mattec.consul.service.exception.ValidaException;
 
 @Service
 public class ClientService {
