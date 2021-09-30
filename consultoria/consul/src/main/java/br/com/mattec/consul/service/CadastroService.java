@@ -31,9 +31,11 @@ public class CadastroService {
 	public void insert(CadastraDto cadDto) {
 		Client client = Client.builder().nome(cadDto.getNome()).cpf(cadDto.getCpf())
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
-		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
-
-		if (cep.isPresent()) {
+		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep());
+		Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
+		
+		if (temCpfNoBanco.isPresent()) throw new IllegalArgumentException("O cpf já existe");
+		if (cep.isPresent() && (!temCpfNoBanco.isPresent())) {
 			client.setEndereco(cep.get());
 			this.clientService.insert(client);
 		} else {
