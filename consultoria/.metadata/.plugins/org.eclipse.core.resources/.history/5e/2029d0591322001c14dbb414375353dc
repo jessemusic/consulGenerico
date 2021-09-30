@@ -36,6 +36,10 @@ public class CadastroService {
 		Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
 		try {
 		if (temCpfNoBanco.isPresent()) 	throw new ValidaException("CPF já cadastrado");
+		
+		try {
+			if(cep.isPresent() && temCpfNoBanco.isPresent()) throw new ValidaException("O cep para o cpf indicado, já está"
+					+ " cadastrado no sistema!");
 			
 		if (cep.isPresent()) {
 			client.setEndereco(cep.get());
@@ -50,10 +54,17 @@ public class CadastroService {
 			this.enderecoService.insert(endereco);
 		}
 		}catch (ValidaException e) {
-			throw new ValidaException(e.getMessage() + cadDto.getCpf());	
+			System.out.println("Verifique se digitou corretamente : " + e);	
 		}
+		} catch (ValidaException es) {
+			System.out.println("Verifique se digitou corretamente, novamente! " + es);
+			
+		}
+
 		
 	}
+
+	
 
 	public void update(CadastraDto upDto) {
 		Optional<Client> clientAtual = clientRepository.findByCpf(upDto.getCpf());

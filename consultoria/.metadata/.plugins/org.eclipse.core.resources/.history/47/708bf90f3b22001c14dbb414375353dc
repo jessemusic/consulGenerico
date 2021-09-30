@@ -36,6 +36,10 @@ public class CadastroService {
 		Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
 		try {
 		if (temCpfNoBanco.isPresent()) 	throw new ValidaException("CPF já cadastrado");
+		
+		
+			if(cep.isPresent() && temCpfNoBanco.isPresent()) throw new ValidaException("O cep para o cpf indicado, já está"
+					+ " cadastrado no sistema!");
 			
 		if (cep.isPresent()) {
 			client.setEndereco(cep.get());
