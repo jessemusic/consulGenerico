@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.mattec.consul.client.CepClient;
+import br.com.mattec.consul.controller.validacao.ValidaDocumentos;
 import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.entities.Endereco;
+import br.com.mattec.consul.entities.client.CepClient;
 import br.com.mattec.consul.reporitory.ClientRepository;
 import br.com.mattec.consul.service.exception.ValidaException;
-import br.com.mattec.consul.util.ValidaCpfCnpj;
 
 @Service
 public class CadastroService {
@@ -34,7 +34,7 @@ public class CadastroService {
 		Client client = Client.builder().nome(cadDto.getNome()).cpf(cadDto.getCpf())
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
 		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
-		ValidaCpfCnpj valida = new ValidaCpfCnpj();
+		ValidaDocumentos valida = new ValidaDocumentos();
 		boolean validaCPF = valida.ValidaCPF(cadDto.getCpf());
 		if (validaCPF) {
 			Optional<CadastraDto> temCpfNoBanco = clientService.findOneWithCpf(cadDto.getCpf());

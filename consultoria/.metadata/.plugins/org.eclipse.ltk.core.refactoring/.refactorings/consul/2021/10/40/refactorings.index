@@ -1,1 +1,4 @@
 1633059075220	Encapsulate field 'list'
+1633125974751	Rename type 'ValidaDocumentos'
+1633126014517	Rename package 'br.com.mattec.consul.controller.validacao'
+1633126211105	Rename package 'br.com.mattec.consul.entities.client'

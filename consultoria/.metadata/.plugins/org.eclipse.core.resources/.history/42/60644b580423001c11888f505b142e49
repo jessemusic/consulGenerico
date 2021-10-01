@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.mattec.consul.client.CepClient;
 import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Endereco;
+import br.com.mattec.consul.entities.client.CepClient;
 import br.com.mattec.consul.reporitory.EnderecoRepository;
 
 @Service
