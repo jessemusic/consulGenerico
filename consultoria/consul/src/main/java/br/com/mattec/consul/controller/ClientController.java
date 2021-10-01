@@ -62,8 +62,8 @@ public class ClientController {
 	
 	}
 	@GetMapping("/findOneWithCpf/{cpf}")
-	public ResponseEntity<Optional<CadastraDto>> findByCpfOne(@PathVariable String cpf){
-		return ResponseEntity.ok().body(this.cliService.findbyCpfOne(cpf));
+	public ResponseEntity<Optional<CadastraDto>> findOneWithCpf(@PathVariable String cpf){
+		return ResponseEntity.ok().body(this.cliService.findOneWithCpf(cpf));
 	}
 	
 	

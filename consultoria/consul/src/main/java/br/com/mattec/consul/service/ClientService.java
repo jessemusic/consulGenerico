@@ -35,16 +35,9 @@ public class ClientService {
 		return this.clientRepository.findAllClientEnderecoOne(rua);
 	}
 	
-	public Optional<CadastraDto> findbyCpfOne(String cpf) {
-		return this.clientRepository.findbyCpfOne(cpf);
+	public Optional<CadastraDto> findOneWithCpf(String cpf) {
+		return this.clientRepository.findOneWithCpf(cpf);
 	}
-	
-	
-	
-	
-	
-
-
 	
 	
 }

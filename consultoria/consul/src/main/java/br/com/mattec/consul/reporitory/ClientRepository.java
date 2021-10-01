@@ -30,7 +30,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 			+ "es.cep, es.logradouro, es.complemento, es.bairro, "
 			+ "es.localidade, es.uf) FROM Client c "
 			+ "INNER JOIN Endereco es ON c.endereco.id = es.id where c.cpf = :cpf ")
-	Optional<CadastraDto> findbyCpfOne(@Param("cpf") String cpf);
+	Optional<CadastraDto> findOneWithCpf(@Param("cpf") String cpf);
 
 	Optional<Client> findByCpf(String cpf);
 }

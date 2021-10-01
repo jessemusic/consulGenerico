@@ -37,7 +37,7 @@ public class CadastroService {
 		ValidaDocumentos valida = new ValidaDocumentos();
 		boolean validaCPF = valida.ValidaCPF(cadDto.getCpf());
 		if (validaCPF) {
-			Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
+			Optional<CadastraDto> temCpfNoBanco = clientService.findOneWithCpf(cadDto.getCpf());
 			try {
 				if (temCpfNoBanco.isPresent())
 					throw new ValidaException("CPF já cadastrado ");
@@ -89,5 +89,4 @@ System.out.println("Não validou");
 			}
 		}
 	}
-
 }
