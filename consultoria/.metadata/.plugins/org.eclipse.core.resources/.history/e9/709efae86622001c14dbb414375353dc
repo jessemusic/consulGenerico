@@ -1,0 +1,6 @@
+package br.com.mattec.consul.controller.exceptions;
+
+public class ValidationError extends StandardError {
+	private static final long serialVersionUID = 1L;
+
+}
