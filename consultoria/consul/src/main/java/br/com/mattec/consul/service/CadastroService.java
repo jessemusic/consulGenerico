@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.mattec.consul.controller.validacao.ValidaDocumentos;
 import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Client;
@@ -29,30 +30,35 @@ public class CadastroService {
 	@Autowired
 	private ClientRepository clientRepository;
 
-	public void insert(CadastraDto cadDto)  throws ValidaException {
+	public void insert(CadastraDto cadDto) throws ValidaException {
 		Client client = Client.builder().nome(cadDto.getNome()).cpf(cadDto.getCpf())
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
 		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
-		Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
-		try {
-		if (temCpfNoBanco.isPresent()) 	throw new ValidaException("CPF já cadastrado ");
-			
-		if (cep.isPresent()) {
-			client.setEndereco(cep.get());
-			this.clientService.insert(client);
-		} else {
-			
-			Endereco endereco = Endereco.builder().cep(cadDto.getCep().replace("-", ""))
-					.logradouro(cadDto.getLogradouro()).bairro(cadDto.getBairro()).localidade(cadDto.getLocalidade())
-					.uf(cadDto.getUf()).build();
-			client.setEndereco(endereco);
-			this.clientService.insert(client);
-			this.enderecoService.insert(endereco);
+		ValidaDocumentos valida = new ValidaDocumentos();
+		boolean validaCPF = valida.ValidaCPF(cadDto.getCpf());
+		if (validaCPF) {
+			Optional<CadastraDto> temCpfNoBanco = clientService.findbyCpfOne(cadDto.getCpf());
+			try {
+				if (temCpfNoBanco.isPresent())
+					throw new ValidaException("CPF já cadastrado ");
+
+				if (cep.isPresent()) {
+					client.setEndereco(cep.get());
+					this.clientService.insert(client);
+				} else {
+
+					Endereco endereco = Endereco.builder().cep(cadDto.getCep().replace("-", ""))
+							.logradouro(cadDto.getLogradouro()).bairro(cadDto.getBairro())
+							.localidade(cadDto.getLocalidade()).uf(cadDto.getUf()).build();
+					client.setEndereco(endereco);
+					this.clientService.insert(client);
+					this.enderecoService.insert(endereco);
+				}
+			} catch (ValidaException e) {
+				throw new ValidaException(e.getMessage() + " com o número: " + cadDto.getCpf());
+			}
 		}
-		}catch (ValidaException e) {
-			throw new ValidaException(e.getMessage()+" com o número: "+ cadDto.getCpf());	
-		}
-		
+System.out.println("Não validou");
 	}
 
 	public void update(CadastraDto upDto) {
@@ -83,6 +89,5 @@ public class CadastroService {
 			}
 		}
 	}
-	
-	
+
 }

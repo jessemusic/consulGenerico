@@ -1,0 +1,24 @@
+package br.com.mattec.consul.controller.validacao;
+
+import br.com.caelum.stella.validation.CPFValidator;
+import br.com.caelum.stella.validation.InvalidStateException;
+
+public class ValidaDocumentos {
+	
+	public boolean ValidaCPF(String cpf) {
+		boolean validou = false;		
+		CPFValidator validaCpf = new CPFValidator();
+		try {
+			validaCpf.assertValid(cpf);
+			System.out.println("CFP Válido");
+			validou = true;
+		} catch (InvalidStateException e) {
+			System.out.println("CPF Inválido " + e);
+			validou = false;
+		}
+		return validou;
+	}
+	
+	
+
+}

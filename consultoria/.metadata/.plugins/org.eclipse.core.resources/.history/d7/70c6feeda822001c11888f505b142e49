@@ -1,0 +1,10 @@
+package br.com.mattec.consul.controller.validacao;
+
+public class ValidaDocumentos {
+	public static void main(String[] args) {
+		
+	}
+	
+	
+
+}

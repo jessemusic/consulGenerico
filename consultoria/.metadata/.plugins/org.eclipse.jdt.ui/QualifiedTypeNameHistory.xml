@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="br.com.mattec.consul.reporitory.ClientRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
-    <fullyQualifiedTypeName name="br.com.mattec.consul.entities.Client"/>
-    <fullyQualifiedTypeName name="org.springframework.data.annotation.QueryAnnotation"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
-    <fullyQualifiedTypeName name="com.sun.tools.classfile.Opcode.Set"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="br.com.mattec.consul.dto.EnderecoDto.EnderecoDtoBuilder"/>
     <fullyQualifiedTypeName name="br.com.mattec.consul.dto.EnderecoDto"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
     <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
     <fullyQualifiedTypeName name="javax.persistence.Embeddable"/>
@@ -33,7 +24,6 @@
     <fullyQualifiedTypeName name="br.com.mattec.consul.verify.RetiraTracoDoCep"/>
     <fullyQualifiedTypeName name="org.hibernate.internal.build.AllowSysOut"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="org.hibernate.validator.constraints.br.CPF"/>
     <fullyQualifiedTypeName name="br.com.mattec.consul.dto.CadastraDto"/>
     <fullyQualifiedTypeName name="br.com.mattec.consul.service.ClientService"/>
     <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
@@ -41,23 +31,33 @@
     <fullyQualifiedTypeName name="javassist.bytecode.stackmap.BasicBlock.Catch"/>
     <fullyQualifiedTypeName name="java.lang.Runtime"/>
     <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.Getter"/>
-    <fullyQualifiedTypeName name="lombok.Setter"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
-    <fullyQualifiedTypeName name="br.com.mattec.consul.controller.exceptions.StandardError"/>
     <fullyQualifiedTypeName name="java.time.Instant"/>
     <fullyQualifiedTypeName name="jdk.jshell.Snippet.Status"/>
-    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
-    <fullyQualifiedTypeName name="br.com.mattec.consul.service.exception.ValidaException"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonFormat"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonFormat.Shape"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="br.com.mattec.consul.controller.exceptions.StandardError"/>
+    <fullyQualifiedTypeName name="ch.qos.logback.classic.Logger"/>
+    <fullyQualifiedTypeName name="javax.validation.constraints.NotEmpty"/>
+    <fullyQualifiedTypeName name="org.hibernate.validator.constraints.Length"/>
+    <fullyQualifiedTypeName name="org.hibernate.validator.constraints.br.CPF"/>
+    <fullyQualifiedTypeName name="javax.validation.Valid"/>
+    <fullyQualifiedTypeName name="br.com.mattec.consul.service.exception.ValidaException"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="lombok.Setter"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="br.com.mattec.consul.controller.exceptions.ValidationError"/>
+    <fullyQualifiedTypeName name="br.com.mattec.consul.controller.exceptions.FieldMessageCustom"/>
+    <fullyQualifiedTypeName name="org.springframework.validation.FieldError"/>
 </qualifiedTypeNameHistroy>

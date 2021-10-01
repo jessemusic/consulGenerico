@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.caelum.stella.validation.InvalidStateException;
 import br.com.mattec.consul.service.exception.ValidaException;
 
 @ControllerAdvice
@@ -27,14 +28,21 @@ public class ValidaExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> Validation(MethodArgumentNotValidException e, HttpServletRequest request){
-		
-		String error = "Erro no sistema!";
 
 		ValidationError err = new ValidationError(Instant.now(),HttpStatus.BAD_REQUEST.value(), "Erro no sistema!", "Erro de Validação!", request.getRequestURI());
 		for(FieldError erros : e.getBindingResult().getFieldErrors()){
 			err.addError(erros.getField(), erros.getDefaultMessage());
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(InvalidStateException.class)
+	public ResponseEntity<StandardError> Validation(InvalidStateException e, HttpServletRequest request){
+
+		String error = "Erro no sistema!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(),status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
 	}
 
 	
