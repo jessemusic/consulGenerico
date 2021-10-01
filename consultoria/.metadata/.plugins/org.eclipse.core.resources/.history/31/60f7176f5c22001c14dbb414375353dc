@@ -38,15 +38,10 @@ public class Client implements Serializable{
 	@Column(name = "id")
 	private Long id;
 	
-	@NotEmpty(message = "Preenchimento obrigatório")
-	@Length(min=5, max=150,message = "O tamanho de ser entre 5 e 120 caracteres")
 	private String nome;
-	@Column(unique = true, updatable = false)
-	@NotEmpty(message = "Preenchimento obrigatório")
-	@CPF
+	
 	private String cpf;
-
-	@NotEmpty(message = "Preenchimento obrigatório")
+	
 	private String numeroEndereco;
 	
 	private String complemento;

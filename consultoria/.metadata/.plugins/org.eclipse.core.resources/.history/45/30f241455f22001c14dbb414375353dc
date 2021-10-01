@@ -56,7 +56,7 @@ public class ClientController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Void> update(@Valid @RequestBody CadastraDto obj){
+	public ResponseEntity<Void> update(@RequestBody CadastraDto obj){
 		this.service.update( obj);
 		return ResponseEntity.ok().build();
 	

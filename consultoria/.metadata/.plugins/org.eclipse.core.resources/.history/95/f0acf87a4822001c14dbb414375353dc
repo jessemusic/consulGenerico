@@ -64,7 +64,7 @@ public class CadastroService {
 			clientAtual.get().setNumeroEndereco(upDto.getNumeroEndereco());
 			clientAtual.get().setComplemento(upDto.getComplemento());
 
-			Optional<Endereco> cep = enderecoService.findByCep(upDto.getCep().replace("-", ""));
+			Optional<Endereco> cep = enderecoService.findByCep(upDto.getCep());
 
 			if (cep.isPresent()) {
 				clientAtual.get().setEndereco(cep.get());
@@ -83,6 +83,4 @@ public class CadastroService {
 			}
 		}
 	}
-	
-	
 }

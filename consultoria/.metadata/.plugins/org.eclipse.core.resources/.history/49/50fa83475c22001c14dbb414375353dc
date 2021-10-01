@@ -33,7 +33,6 @@ public class CadastraDto implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String numeroEndereco;
 	
-	@NotEmpty(message = "Preenchimento obrigatório")
 	@Column(unique = true,updatable = false)
 	private String cep;
 	
