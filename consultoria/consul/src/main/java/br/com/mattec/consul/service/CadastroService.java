@@ -11,8 +11,8 @@ import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.dto.EnderecoDto;
 import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.entities.Endereco;
+import br.com.mattec.consul.exceptions.ValidaException;
 import br.com.mattec.consul.reporitory.ClientRepository;
-import br.com.mattec.consul.service.exception.ValidaException;
 
 @Service
 public class CadastroService {

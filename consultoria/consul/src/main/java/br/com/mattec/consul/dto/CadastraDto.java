@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import br.com.mattec.consul.service.validation.ClientInsertCpfOrCnpj;
+import br.com.mattec.consul.validation.ClientInsertCpfOrCnpj;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
