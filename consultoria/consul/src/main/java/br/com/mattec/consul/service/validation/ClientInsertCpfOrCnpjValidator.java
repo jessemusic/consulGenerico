@@ -20,17 +20,16 @@ public class ClientInsertCpfOrCnpjValidator implements ConstraintValidator<Clien
 	@Override
 	public boolean isValid(CadastraDto objDto, ConstraintValidatorContext context) {
 
-		boolean tem = false;
+		int tem = 0;
 
 		for (TipoClient tc : TipoClient.values()) {
 			System.out.println(tc.getCod());
 			if (objDto.getTipo() == tc.getCod()) {
-				tem = true;
-			} else {
-				tem = false;
-			}
+				tem += 1;
+			} 
 		}
-		if (tem) {
+		System.out.println(tem + "cógido no body -> " + objDto.getTipo());
+		if (tem != 0) {
 			List<FieldMessageCustom> list = new ArrayList<>();
 
 			if (objDto.getTipo().equals(TipoClient.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
@@ -49,7 +48,7 @@ public class ClientInsertCpfOrCnpjValidator implements ConstraintValidator<Clien
 			return list.isEmpty();
 
 		}else {
-			throw new NullPointerException("Erro");
+			throw new IllegalArgumentException();
 		}
 
 	}
