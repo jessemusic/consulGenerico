@@ -13,31 +13,44 @@ import br.com.mattec.consul.service.validation.util.BR;
 
 public class ClientInsertCpfOrCnpjValidator implements ConstraintValidator<ClientInsertCpfOrCnpj, CadastraDto> {
 
-
-	
 	@Override
 	public void initialize(ClientInsertCpfOrCnpj ann) {
 	}
 
 	@Override
 	public boolean isValid(CadastraDto objDto, ConstraintValidatorContext context) {
-		List<FieldMessageCustom> list = new ArrayList<>();
-		
-		if(objDto.getTipo().equals(TipoClient.PESSOAFISICA.getCod()) && !BR.isValidCPF(
-				objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessageCustom("cpfOuCnpj", "CPF Inválido"));
-		}
-		if(objDto.getTipo().equals(TipoClient.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(
-				objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessageCustom("cpfOuCnpj", "CNPJ Inválido"));
-		}
-				
 
-		for (FieldMessageCustom e : list) {
-			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
-					.addConstraintViolation();
+		boolean tem = false;
+
+		for (TipoClient tc : TipoClient.values()) {
+			System.out.println(tc.getCod());
+			if (objDto.getTipo() == tc.getCod()) {
+				tem = true;
+			} else {
+				tem = false;
+			}
 		}
-		return list.isEmpty();
+		if (tem) {
+			List<FieldMessageCustom> list = new ArrayList<>();
+
+			if (objDto.getTipo().equals(TipoClient.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+				list.add(new FieldMessageCustom("cpfOuCnpj", "CPF Inválido"));
+			}
+			if (objDto.getTipo().equals(TipoClient.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
+
+				list.add(new FieldMessageCustom("cpfOuCnpj", "CNPJ Inválido"));
+			}
+			for (FieldMessageCustom e : list) {
+				context.disableDefaultConstraintViolation();
+				context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
+						.addConstraintViolation();
+
+			}
+			return list.isEmpty();
+
+		}else {
+			throw new NullPointerException("Erro");
+		}
+
 	}
 }

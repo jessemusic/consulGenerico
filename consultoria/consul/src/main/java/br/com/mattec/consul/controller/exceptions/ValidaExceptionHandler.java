@@ -81,7 +81,16 @@ public class ValidaExceptionHandler {
 
 		String error = "Erro no sistema!";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		StandardError err = new StandardError(Instant.now(),status.value(), error, "O tipo de cliente está nulo, impossível verificar se é cpf ou cnpj!", request.getRequestURI());
+		StandardError err = new StandardError(Instant.now(),status.value(), error, "Opção do tipo inválida de cadastro de documentos, impossível verificar se é cpf ou cnpj!", request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<StandardError> Validation(IllegalArgumentException e, HttpServletRequest request){
+
+		String error = "Erro no sistema!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(),status.value(), error, "Opção do tipo inválida de cadastro de documentos", request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 
