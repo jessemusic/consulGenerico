@@ -25,7 +25,8 @@ public class CadastroService {
 
 	@Autowired
 	private EnderecoService enderecoService;
-
+	
+	
 	@Autowired
 	private ClientRepository clientRepository;
 

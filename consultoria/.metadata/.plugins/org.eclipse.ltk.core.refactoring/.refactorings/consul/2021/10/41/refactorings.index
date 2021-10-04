@@ -8,3 +8,6 @@
 1633352892464	Delete element
 1633352924515	Rename package 'br.com.mattec.consul.service.validation'
 1633352970241	Rename package 'br.com.mattec.consul.service.validation.util'
+1633356173181	Rename package 'br.com.mattec.consul.validation'
+1633356185024	Move compilation unit
+1633356192122	Delete element
