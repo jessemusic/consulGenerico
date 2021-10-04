@@ -14582,3 +14582,48 @@ Binding(CTRL+SHIFT+C,
 
 !ENTRY Activator 1 0 2021-10-04 01:47:17.662
 !MESSAGE Has main method computation for project 'consul'
+
+!ENTRY org.eclipse.lsp4e 2 0 2021-10-04 01:57:28.683
+!MESSAGE Timeout waiting for data to generate LS hover
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2085)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY Activator 1 0 2021-10-04 01:57:55.187
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:57:55.786
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:57:55.918
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:57:58.979
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:57:59.072
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:57:59.183
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:58:12.032
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:58:12.743
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:58:14.671
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:58:14.770
+!MESSAGE Has main method computation for project 'consul'
+
+!ENTRY Activator 1 0 2021-10-04 01:58:14.866
+!MESSAGE Has main method computation for project 'consul'

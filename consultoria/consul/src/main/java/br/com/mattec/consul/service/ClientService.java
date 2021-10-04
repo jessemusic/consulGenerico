@@ -17,9 +17,6 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 	
-	@Autowired
-	private EnderecoService enderecoService;
-	
 	@Transactional
 	public Client insert(Client client) {
 		return clientRepository.save(client);
