@@ -23,10 +23,12 @@ public class ClientInsertCpfOrCnpjValidator implements ConstraintValidator<Clien
 		int tem = 0;
 
 		for (TipoClient tc : TipoClient.values()) {
+			System.out.println(tc.getCod());
 			if (objDto.getTipo() == tc.getCod()) {
 				tem += 1;
 			} 
 		}
+		System.out.println(tem + "cógido no body -> " + objDto.getTipo());
 		if (tem != 0) {
 			List<FieldMessageCustom> list = new ArrayList<>();
 
