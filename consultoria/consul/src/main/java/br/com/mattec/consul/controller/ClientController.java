@@ -50,9 +50,9 @@ public class ClientController {
 		return ResponseEntity.ok().body(this.cliService.findAllCadastra());
 	}
 	//traz uma lista de todos clientes contidos em um único endereço, dado o endereço no path
-	@GetMapping("/findClientEnderecoOne")
-	public ResponseEntity<List<CadastraDto>> findAllClientEnderecoOne(@RequestParam String rua){
-		return ResponseEntity.ok().body(this.cliService.findAllClientEnderecoOne(rua));
+	@GetMapping("/findClientsEnderecoOne")
+	public ResponseEntity<List<CadastraDto>> findClientsEnderecoOne(@RequestParam String rua){
+		return ResponseEntity.ok().body(this.cliService.findClientsEnderecoOne(rua));
 	}
 	
 	@PutMapping("/update")
@@ -61,12 +61,9 @@ public class ClientController {
 		return ResponseEntity.ok().build();
 	
 	}
-	@GetMapping("/findOneWithCpf/{cpf}")
-	public ResponseEntity<Optional<CadastraDto>> findOneWithCpf(@PathVariable String cpf){
-		return ResponseEntity.ok().body(this.cliService.findOneWithCpf(cpf));
+	@GetMapping("/findOneWithCpfOuCnpj/{cpfOuCnpj}")
+	public ResponseEntity<Optional<CadastraDto>> findOneWithCpfOuCnpj(@PathVariable String cpfOuCnpj){
+		return ResponseEntity.ok().body(this.cliService.findOneWithCpfOuCnpj(cpfOuCnpj));
 	}
 	
-	
-	
-
 }

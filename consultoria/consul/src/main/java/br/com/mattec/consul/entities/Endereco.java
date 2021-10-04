@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -53,7 +54,7 @@ public class Endereco  implements Serializable{
 	private String ddd;
 	private String siafi;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToMany(mappedBy = "endereco", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
 	private List<Client> clients;

@@ -11,4 +11,22 @@
 	</section>
 	<section name="ImportExportAction">
 	</section>
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_WIDTH" value="1159"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_HEIGHT" value="506"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
+		<list key="orderedElements">
+			<item value="@/client/findOneWithCpfOrCnpj/{cpfOrCnpj} -- GET@file:///E:/VIACEP/consultoria/consul/src/main/java/br/com/mattec/consul/controller/ClientController.java[63,1:63,49],-892374225"/>
+		</list>
+		<list key="orderedProviders">
+			<item value="org.eclipse.lsp4e/org.eclipse.lsp4e.operations.symbols.WorkspaceSymbolsQuickAccessProvider"/>
+		</list>
+		<list key="textEntries">
+			<item value="1"/>
+		</list>
+		<list key="textArray">
+			<item value="cpf"/>
+		</list>
+	</section>
 </section>

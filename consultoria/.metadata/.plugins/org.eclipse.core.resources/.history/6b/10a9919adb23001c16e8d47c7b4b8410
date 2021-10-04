@@ -1,0 +1,30 @@
+package br.com.mattec.consul.service.validation;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+import br.com.mattec.consul.dto.CadastraDto;
+
+public class ClientInsertCpfOrPnpjValidator  implements ConstraintValidator<ClientInsertCpfOrPnpj, CadastraDto> {
+	
+	@Override 
+	public void initialize(ClientInsertCpfOrPnpj ann) {
+	 }
+	 @Override
+	 public boolean isValid(CadastraDto objDto, ConstraintValidatorContext context) {
+	 List<FieldMessage> list = new ArrayList<>();
+	 
+	 // inclua os testes aqui, inserindo erros na lista
+	 
+	 for (FieldMessage e : list) {
+	 context.disableDefaultConstraintViolation();
+	 context.buildConstraintViolationWithTemplate(e.getMessage())
+	 .addPropertyNode(e.getFieldName()).addConstraintViolation();
+	 }
+	 return list.isEmpty();
+	 }
+	}
+}

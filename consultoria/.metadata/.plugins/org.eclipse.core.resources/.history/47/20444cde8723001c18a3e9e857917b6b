@@ -1,0 +1,46 @@
+package br.com.mattec.consul.util;
+
+import br.com.caelum.stella.validation.CNPJValidator;
+import br.com.caelum.stella.validation.CPFValidator;
+import br.com.caelum.stella.validation.InvalidStateException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+public class ValidaCpfCnpj {
+	
+	private String cpfOrCnpjValida;
+	
+	public static boolean ValidaCPF(String cpfOrCnpjValida) {
+		boolean validou = false;		
+		if(cpfOrCnpjValida.length() == 11) {
+			CPFValidator validaCpf = new CPFValidator();
+			try {
+				validaCpf.assertValid(cpfOrCnpjValida);
+				System.out.println("CFP Válido");
+				validou = true;
+			} catch (InvalidStateException e) {
+				System.out.println("CPF Inválido " + e);
+				validou = false;
+			}
+			if(cpfOrCnpjValida.length() == 14) {
+				 CNPJValidator cnpjValidator = new CNPJValidator();
+				try {
+					validaCpf.assertValid(cpfOrCnpjValida);
+					System.out.println("Cnpj Válido");
+					validou = true;
+				} catch (InvalidStateException e) {
+					System.out.println("Cnpj Inválido " + e);
+					validou = false;
+				}
+		}
+		
+		return validou;
+	}
+	
+	
+
+}

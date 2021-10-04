@@ -1,0 +1,5 @@
+package br.com.mattec.consul.service.validation.util;
+
+public class BR {
+
+}

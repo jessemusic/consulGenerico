@@ -15,23 +15,28 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.mattec.consul.entities.enums.TipoClient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
 @Builder
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "client")
-public class Client implements Serializable{
-	private static final long serialVersionUID = 1L;	
+@Setter
+@Getter
+public class Client {
+	
+	
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,20 +46,48 @@ public class Client implements Serializable{
 	@NotEmpty(message = "Preenchimento obrigatório")
 	@Length(min=5, max=150,message = "O tamanho de ser entre 5 e 120 caracteres")
 	private String nome;
+	
 	@Column(unique = true, updatable = false)
-	@NotEmpty(message = "Preenchimento obrigatório")
-	@CPF
-	private String cpf;
+	private String cpfOuCnpj;
+	
+	private Integer tipo;
 
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String numeroEndereco;
 	
 	private String complemento;
 	
-	@JsonBackReference 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false)
 	 private Endereco endereco;
 	
+	public Client(Long id,
+			@NotEmpty(message = "Preenchimento obrigatório") @Length(min = 5, max = 150, message = "O tamanho de ser entre 5 e 120 caracteres") String nome,
+			@NotEmpty(message = "Preenchimento obrigatório") String cpfOuCnpj, TipoClient tipo,
+			@NotEmpty(message = "Preenchimento obrigatório") String numeroEndereco, String complemento,
+			Endereco endereco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cpfOuCnpj = cpfOuCnpj;
+		this.tipo = (tipo==null) ? null :tipo.getCod();
+		this.numeroEndereco = numeroEndereco;
+		this.complemento = complemento;
+		this.endereco = endereco;
+	}
+
 	
+	public TipoClient getTipo() {
+		return TipoClient.toEnum(tipo);
+	}
+	
+	public void setTipo(TipoClient tipo) {
+		this.tipo = tipo.getCod();
+		
+	}
+
+	
+
+
 }

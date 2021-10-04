@@ -5,11 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mattec.consul.dto.CadastraDto;
 import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.reporitory.ClientRepository;
-import br.com.mattec.consul.service.exception.ValidaException;
 
 @Service
 public class ClientService {
@@ -20,6 +20,7 @@ public class ClientService {
 	@Autowired
 	private EnderecoService enderecoService;
 	
+	@Transactional
 	public Client insert(Client client) {
 		return clientRepository.save(client);
 	}
@@ -31,12 +32,12 @@ public class ClientService {
 		return this.clientRepository.findAllCadastro();	
 	}
 	
-	public List<CadastraDto> findAllClientEnderecoOne(String rua){
-		return this.clientRepository.findAllClientEnderecoOne(rua);
+	public List<CadastraDto> findClientsEnderecoOne(String rua){
+		return this.clientRepository.findClientsEnderecoOne(rua);
 	}
 	
-	public Optional<CadastraDto> findOneWithCpf(String cpf) {
-		return this.clientRepository.findOneWithCpf(cpf);
+	public Optional<CadastraDto> findOneWithCpfOuCnpj(String cpfOuCnpj) {
+		return this.clientRepository.findOneWithCpfOuCnpj(cpfOuCnpj);
 	}
 	
 	

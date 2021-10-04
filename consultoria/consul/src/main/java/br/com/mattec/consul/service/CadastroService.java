@@ -13,7 +13,6 @@ import br.com.mattec.consul.entities.Client;
 import br.com.mattec.consul.entities.Endereco;
 import br.com.mattec.consul.reporitory.ClientRepository;
 import br.com.mattec.consul.service.exception.ValidaException;
-import br.com.mattec.consul.util.ValidaCpfCnpj;
 
 @Service
 public class CadastroService {
@@ -26,21 +25,21 @@ public class CadastroService {
 
 	@Autowired
 	private EnderecoService enderecoService;
-
+	
+	
 	@Autowired
 	private ClientRepository clientRepository;
 
 	public void insert(CadastraDto cadDto) throws ValidaException {
-		Client client = Client.builder().nome(cadDto.getNome()).cpf(cadDto.getCpf())
+		Client client = Client.builder().nome(cadDto.getNome()).tipo(cadDto.getTipo())
+				.cpfOuCnpj(cadDto.getCpfOuCnpj())
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
 		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
-		ValidaCpfCnpj valida = new ValidaCpfCnpj();
-		boolean validaCPF = valida.ValidaCPF(cadDto.getCpf());
-		if (validaCPF) {
-			Optional<CadastraDto> temCpfNoBanco = clientService.findOneWithCpf(cadDto.getCpf());
+		
+			Optional<CadastraDto> temCpfNoBanco = clientService.findOneWithCpfOuCnpj(cadDto.getCpfOuCnpj());
 			try {
 				if (temCpfNoBanco.isPresent())
-					throw new ValidaException("CPF já cadastrado ");
+					throw new ValidaException("CPF ou CNPJ já cadastrado ");
 
 				if (cep.isPresent()) {
 					client.setEndereco(cep.get());
@@ -55,18 +54,18 @@ public class CadastroService {
 					this.enderecoService.insert(endereco);
 				}
 			} catch (ValidaException e) {
-				throw new ValidaException(e.getMessage() + " com o número: " + cadDto.getCpf());
+				throw new ValidaException(e.getMessage() + " com o número: " + cadDto.getCpfOuCnpj());
 			}
 		}
-System.out.println("Não validou");
-	}
+	
+	
 
 	public void update(CadastraDto upDto) {
-		Optional<Client> clientAtual = clientRepository.findByCpf(upDto.getCpf());
+		Optional<Client> clientAtual = clientRepository.findByCpfOuCnpj(upDto.getCpfOuCnpj());
 
 		if (clientAtual.isPresent()) {
 			clientAtual.get().setNome(upDto.getNome());
-			clientAtual.get().setCpf(upDto.getCpf());
+			clientAtual.get().setCpfOuCnpj(upDto.getCpfOuCnpj());
 			clientAtual.get().setNumeroEndereco(upDto.getNumeroEndereco());
 			clientAtual.get().setComplemento(upDto.getComplemento());
 
@@ -86,6 +85,7 @@ System.out.println("Não validou");
 				this.enderecoService.insert(enderecoAtual);
 				clientAtual.get().setEndereco(enderecoAtual);
 				this.clientService.insert(clientAtual.get());
+
 			}
 		}
 	}

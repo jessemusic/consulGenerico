@@ -12,8 +12,8 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 
-import br.com.caelum.stella.validation.InvalidStateException;
 import br.com.mattec.consul.service.exception.ValidaException;
 
 @ControllerAdvice
@@ -38,14 +38,14 @@ public class ValidaExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 	
-	@ExceptionHandler(InvalidStateException.class)
-	public ResponseEntity<StandardError> Validation(InvalidStateException e, HttpServletRequest request){
-
-		String error = "Erro no sistema!";
-		HttpStatus status = HttpStatus.BAD_REQUEST;
-		StandardError err = new StandardError(Instant.now(),status.value(), error, e.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(status).body(err);
-	}
+//	@ExceptionHandler(InvalidStateException.class)
+//	public ResponseEntity<StandardError> Validation(InvalidStateException e, HttpServletRequest request){
+//
+//		String error = "Erro no sistema!";
+//		HttpStatus status = HttpStatus.BAD_REQUEST;
+//		StandardError err = new StandardError(Instant.now(),status.value(), error, e.getMessage(), request.getRequestURI());
+//		return ResponseEntity.status(status).body(err);
+//	}
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<StandardError> Validation(HttpMessageNotReadableException e, HttpServletRequest request){
@@ -63,6 +63,15 @@ public class ValidaExceptionHandler {
 		String error = "Erro no sistema!";
 		HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED;
 		StandardError err = new StandardError(Instant.now(),status.value(), error, "Erro no método HTTP!", request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(HttpClientErrorException.class)
+	public ResponseEntity<StandardError> Validation(HttpClientErrorException e, HttpServletRequest request){
+
+		String error = "Erro no sistema!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(),status.value(), error, "Não é um cep!", request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 

@@ -14,23 +14,23 @@ import br.com.mattec.consul.entities.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 	
-	@Query("SELECT new br.com.mattec.consul.dto.CadastraDto(c.nome, c.cpf, c.numeroEndereco, "
+	@Query("SELECT new br.com.mattec.consul.dto.CadastraDto(c.nome, c.tipo, c.cpfOuCnpj, c.numeroEndereco, "
 			+ "e.cep, e.logradouro, e.complemento, e.bairro, "
 			+ "e.localidade, e.uf) FROM Client c "
 			+ "INNER JOIN Endereco e ON c.endereco.id = e.id")
 	List<CadastraDto> findAllCadastro();
 	
-	@Query("SELECT new br.com.mattec.consul.dto.CadastraDto(c.nome, c.cpf, c.numeroEndereco, "
+	@Query("SELECT new br.com.mattec.consul.dto.CadastraDto(c.nome, c.tipo,c.cpfOuCnpj, c.numeroEndereco, "
 			+ "e.cep, e.logradouro, e.complemento, e.bairro, "
 			+ "e.localidade, e.uf) FROM Client c "
 			+ "INNER JOIN Endereco e ON c.endereco.id = e.id where e.logradouro = :rua ")
-	List<CadastraDto> findAllClientEnderecoOne(@Param("rua") String rua);
+	List<CadastraDto> findClientsEnderecoOne(@Param("rua") String rua);
 	
-	@Query("SELECT new br.com.mattec.consul.dto.CadastraDto(c.nome, c.cpf, c.numeroEndereco, "
+	@Query("SELECT new br.com.mattec.consul.dto.CadastraDto(c.nome,c.tipo, c.cpfOuCnpj,c.numeroEndereco, "
 			+ "es.cep, es.logradouro, es.complemento, es.bairro, "
 			+ "es.localidade, es.uf) FROM Client c "
-			+ "INNER JOIN Endereco es ON c.endereco.id = es.id where c.cpf = :cpf ")
-	Optional<CadastraDto> findOneWithCpf(@Param("cpf") String cpf);
+			+ "INNER JOIN Endereco es ON c.endereco.id = es.id where c.cpfOuCnpj = :cpfOuCnpj ")
+	Optional<CadastraDto> findOneWithCpfOuCnpj(@Param("cpfOuCnpj") String cpfOuCnpj);
 
-	Optional<Client> findByCpf(String cpf);
+	Optional<Client> findByCpfOuCnpj(String cpfOuCnpj);
 }
