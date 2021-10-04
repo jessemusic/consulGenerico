@@ -36,9 +36,9 @@ public class CadastroService {
 				.numeroEndereco(cadDto.getNumeroEndereco()).complemento(cadDto.getComplemento()).build();
 		Optional<Endereco> cep = enderecoService.findByCep(cadDto.getCep().replace("-", ""));
 		
-			Optional<CadastraDto> temCpfOuCnpjNoBanco = clientService.findOneWithCpfOuCnpj(cadDto.getCpfOuCnpj());
+			Optional<CadastraDto> temCpfNoBanco = clientService.findOneWithCpfOuCnpj(cadDto.getCpfOuCnpj());
 			try {
-				if (temCpfOuCnpjNoBanco.isPresent())
+				if (temCpfNoBanco.isPresent())
 					throw new ValidaException("CPF ou CNPJ já cadastrado ");
 
 				if (cep.isPresent()) {

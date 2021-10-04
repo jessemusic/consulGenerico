@@ -31,7 +31,10 @@ public class ClientInsertCpfOrCnpjValidator implements ConstraintValidator<Clien
 				objDto.getCpfOuCnpj())) {
 			list.add(new FieldMessageCustom("cpfOuCnpj", "CNPJ Inválido"));
 		}
-				
+		if(objDto.getTipo().compareTo(TipoClient.PESSOAFISICA.getCod()) !=1 || objDto.getTipo().compareTo(TipoClient.PESSOAJURIDICA.getCod()) != 2){
+			list.add(new FieldMessageCustom("cpfOuCnpj", "Tipo inválido no cadastro, não é cpf e nem cnpj"));
+		}
+		
 
 		for (FieldMessageCustom e : list) {
 			context.disableDefaultConstraintViolation();
