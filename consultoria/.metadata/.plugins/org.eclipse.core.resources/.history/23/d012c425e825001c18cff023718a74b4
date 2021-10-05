@@ -1,0 +1,45 @@
+package br.com.mattec.consul.mapper;
+
+import java.util.function.Function;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
+
+import br.com.mattec.consul.dto.ClientEntityDto;
+import br.com.mattec.consul.entities.ClientEntity;
+@Component
+public class ClientMapper {
+	
+	public ClientEntity entityto(ClientEntityDto clientDto) {
+		
+		ClientEntity client = ClientEntity.builder()
+				.id(clientDto.getId())
+				.nome(clientDto.getNome())
+				.numeroEndereco(clientDto.getNumeroEndereco()).build();
+		
+		return client;
+				
+	}
+	public ClientEntityDto dtoTo(ClientEntity clientEntity) {
+		return ClientEntityDto.builder()
+				.id(clientEntity.getId())
+				.nome(clientEntity.getNome())
+				.numeroEndereco(clientEntity.getNumeroEndereco())
+				.build();
+	}
+	public Page<ClientEntityDto> dtoListto(Page<ClientEntity> client){
+		return client.map(new Function<ClientEntity, ClientEntityDto>() {
+
+			@Override
+			public ClientEntityDto apply(ClientEntity cliEnty) {
+				
+				return ClientEntityDto.builder()
+						.id(cliEnty.getId())
+						.nome(cliEnty.getNome())
+						.numeroEndereco(cliEnty.getNumeroEndereco())
+						.build();
+			}
+		});
+	}
+
+}

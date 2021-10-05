@@ -1,0 +1,5 @@
+package br.com.mattec.consul.controller;
+
+public class CategoriaController {
+
+}

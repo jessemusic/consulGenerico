@@ -54,8 +54,4 @@ public class CadastraDto implements Serializable{
 	
 	private String uf;
 
-	
-	
-	
-	
 }

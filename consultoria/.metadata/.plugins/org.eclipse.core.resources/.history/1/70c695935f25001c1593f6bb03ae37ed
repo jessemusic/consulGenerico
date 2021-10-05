@@ -1,0 +1,12 @@
+package br.com.mattec.consul.mapper;
+
+import br.com.mattec.consul.dto.ClientDto;
+
+public enum ClientMapper {
+	
+	public ClientEntity entityto(ClientDto clientDto) {
+		return ClientEntity.
+		
+	}
+
+}

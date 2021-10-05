@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mattec.consul.dto.CadastraDto;
-import br.com.mattec.consul.entities.Client;
+import br.com.mattec.consul.entities.ClientEntity;
 import br.com.mattec.consul.reporitory.ClientRepository;
 
 @Service
@@ -18,11 +18,11 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	
 	@Transactional
-	public Client insert(Client client) {
+	public ClientEntity insert(ClientEntity client) {
 		return clientRepository.save(client);
 	}
 	
-	public List<Client> findAll() {
+	public List<ClientEntity> findAll() {
 		return this.clientRepository.findAll();
 	}
 	public List<CadastraDto> findAllCadastra(){

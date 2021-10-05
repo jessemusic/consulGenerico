@@ -5,11 +5,11 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.mattec.consul.entities.Endereco;
+import br.com.mattec.consul.entities.EnderecoEntity;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
+public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Long> {
     
-	Optional<Endereco> findByCep(String cep);
+	Optional<EnderecoEntity> findByCep(String cep);
 
 }

@@ -11,3 +11,13 @@
 1633356173181	Rename package 'br.com.mattec.consul.validation'
 1633356185024	Move compilation unit
 1633356192122	Delete element
+1633368013650	Rename type 'ClienteDto'
+1633405340306	Rename package 'br.com.mattec.consul.controller.formulario'
+1633443545544	Rename type 'Client'
+1633443570060	Rename type 'Endereco'
+1633443630238	Rename type 'ClientDto'
+1633443780304	Rename type 'EnderecoDto'
+1633443954085	Rename type 'ClientEntityDto'
+1633443973565	Rename type 'EnderecoEntityDto'
+1633447307338	Copy compilation unit
+1633447500495	Copy compilation unit

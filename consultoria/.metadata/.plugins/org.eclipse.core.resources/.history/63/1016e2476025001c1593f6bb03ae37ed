@@ -1,0 +1,18 @@
+package br.com.mattec.consul.mapper;
+
+import br.com.mattec.consul.dto.ClientDto;
+
+public class ClientMapper {
+	
+	public ClientEntity entityto(ClientDto clientDto) {
+		return ClientEntity.builder()
+				.id(clientDto.getId())
+				.nome(clientDto.getNome())
+				.bairro(clientDto.getBairro())
+				localidade(clientDto.getLocalidade())
+				uf(clientDto.getUf()).build();
+				
+		
+	}
+
+}
