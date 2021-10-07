@@ -1,0 +1,17 @@
+package br.com.mattec.consul.util;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+
+public class CodigoBarras {
+	
+	public static void main(String[] args) {
+		
+		Document doc = new Document();
+		PdfWriter pdf = PdfWriter.
+		
+		
+	}
+	
+
+}
