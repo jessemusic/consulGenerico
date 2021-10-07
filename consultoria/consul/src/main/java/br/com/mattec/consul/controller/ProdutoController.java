@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.mattec.consul.dto.ProdutoDto;
 import br.com.mattec.consul.entities.ProdutoEntity;
 import br.com.mattec.consul.service.ProdutoService;
 
@@ -26,14 +27,14 @@ public class ProdutoController {
 
 
 	@GetMapping("/listProdutos")
-	public ResponseEntity<List<ProdutoEntity>> findAll() {
-		return ResponseEntity.ok().body(this.service.findAll());
+	public ResponseEntity<Object> findAllAndCategoria() {
+		return ResponseEntity.ok().body(this.service.findAllAndCategoria());
 
 	}
 	
-	@GetMapping("findProdutoById/{id}")
-	public ResponseEntity<Optional<ProdutoEntity>> findById(@PathVariable Long id) {
-		return ResponseEntity.ok().body(this.service.find(id));
+	@GetMapping("/findProdutoByAll")
+	public ResponseEntity<List<ProdutoDto>> findById() {
+		return ResponseEntity.ok().body(this.service.findAll());
 
 	}
 	

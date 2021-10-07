@@ -33,8 +33,12 @@ public class CategoriaController {
 	
 	@GetMapping("findCategoriaById/{id}")
 	public ResponseEntity<Optional<Categoria>> findById(@PathVariable Long id) {
-		return ResponseEntity.ok().body(this.service.find(id));
-
+		Optional<Categoria> categoria = this.service.find(id);
+		if(categoria.isPresent()) {
+			return ResponseEntity.ok().body(categoria);
+		}else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	@PostMapping("/save")

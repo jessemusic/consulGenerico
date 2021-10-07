@@ -1,0 +1,84 @@
+package br.com.mattec.consul.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.mattec.consul.dto.CadastraDto;
+import br.com.mattec.consul.dto.ProdutoDto;
+import br.com.mattec.consul.entities.Categoria;
+import br.com.mattec.consul.entities.EnderecoEntity;
+import br.com.mattec.consul.entities.ProdutoEntity;
+import br.com.mattec.consul.exceptions.ValidaException;
+import br.com.mattec.consul.reporitory.ProdutoRepository;
+
+@Service
+public class ProdutoService {
+
+	@Autowired
+	private ProdutoRepository repo;
+	
+	public List<ProdutoEntity> findAll(){
+		return repo.findAll();
+	}
+	
+	public Optional<ProdutoDto> find(ProdutoDto dto){
+		
+		ProdutoEntity produto = ProdutoEntity.builder().id(dto.getId())
+				.nome(dto.getNome())
+				.preco(dto.getPreco())
+				.codigoDeBarra(dto.getCodigoDeBarra())
+				.dataDeCompra(dto.getDataDeCompra())
+				.dataDeValidade(dto.getDataDeValidade()).build();
+				
+		Categoria category = Categoria.builder().nome(null)
+		
+			Optional<CadastraDto> temCpfOuCnpjNoBanco = clientService.findOneWithCpfOuCnpj(cadDto.getCpfOuCnpj());
+			
+			
+			
+			
+			
+			
+//			try {
+//				if (temCpfOuCnpjNoBanco.isPresent())
+//					throw new ValidaException("CPF ou CNPJ já cadastrado ");
+//
+//				if (cep.isPresent()) {
+//					client.setEndereco(cep.get());
+//					this.clientService.insert(client);
+//				} else {
+//
+//					EnderecoEntity endereco = EnderecoEntity.builder().cep(cadDto.getCep().replace("-", ""))
+//							.logradouro(cadDto.getLogradouro()).bairro(cadDto.getBairro())
+//							.localidade(cadDto.getLocalidade()).uf(cadDto.getUf()).build();
+//					client.setEndereco(endereco);
+//					this.clientService.insert(client);
+//					this.enderecoService.insert(endereco);
+//				}
+//			} catch (ValidaException e) {
+//				throw new ValidaException(e.getMessage() + " com o número: " + cadDto.getCpfOuCnpj());
+//			}
+//		}
+		return repo.findById(id);
+	}
+	
+	
+	public ProdutoEntity insert(ProdutoEntity categoria) {
+		return repo.save(categoria);
+	}
+
+
+	
+	public Object findAllAndCategoria() {
+		return null;
+	}
+	
+	
+	
+
+
+
+}

@@ -1,0 +1,108 @@
+package br.com.mattec.consul.util;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sun.image.codec.jpeg.*;
+
+
+public class Boleto {
+	
+	
+	public class boleto &#123;
+
+	java.awt.image.BufferedImage image;
+
+	/** Metodo criaImagem
+	* Usado para criacao da imagem que representa o codigo de barras
+	@author Ricardo Gil
+	*/
+	public boolean criaImagem&#40;String texto,PageContext pageContext, int h&#41;
+	                                 throws ServletException,IOException &#123;
+	int i, j, tam;
+	//Variavel que contem a representacao em Codigo de Barras de cada um dos numeros.
+	//Nessa representacao&#58;
+	// 0 significa Barra Fina &#40;NARROW&#41;;
+	// 1 significa Barra Grossa &#40;WIDE&#41;.
+	String&#91;&#93; barras = &#123;&quot;00110&quot;, //0
+	                   &quot;10001&quot;, //1
+	                   &quot;01001&quot;, //2
+	                   &quot;11000&quot;, //3
+	                   &quot;00101&quot;, //4
+	                   &quot;10100&quot;, //5
+	                   &quot;01100&quot;, //6
+	                   &quot;00011&quot;, //7
+	                   &quot;10010&quot;, //8
+	                   &quot;01010&quot;&#125;;//9
+	//O Codigo de barras e formado sempre por pares intercalados.
+	//Por exemplo 12&#58;
+	//Pegando-se a representacao do 1 e do 2 na variavel acima teriamos o seguinte&#58;
+	//1001000011.
+	//Com isso, o primeiro numero representa as Barras Pretas &#40;Fina ou Grossa&#41;
+	// e o Segundo numero representa as Barras Brancas, ou espacos, &#40;Fina ou Grossa&#41;.
+	int preto,branco;
+	int w = 9 + &#40;9 * texto.length&#40;&#41;&#41;;
+	HttpServletResponse response;
+	response = &#40;HttpServletResponse&#41;pageContext.getResponse&#40;&#41;;
+	ServletOutputStream out = response.getOutputStream&#40;&#41;;
+	image = new java.awt.image.BufferedImage&#40;w,h, java.awt.image.BufferedImage.TYPE_INT_RGB&#41;;
+	tam = 0;
+	fillRect&#40;0, 0, w, h, 0x00FFFFFF&#41;; //começo do Codigo de Barras = 0 = 00 / 1 = 00
+	fillRect&#40;tam, 0, tam+1, h, 0x00000000&#41;;
+	tam++;
+	fillRect&#40;tam, 0, tam+1, h, 0x00FFFFFF&#41;;
+	tam++;
+	fillRect&#40;tam, 0, tam+1, h, 0&#41;;
+	tam++;
+	fillRect&#40;tam, 0, tam+1, h, 0x00FFFFFF&#41;;
+	tam++;
+	//Conteudo do Codigo de Barras
+	for&#40;i = 0; i &lt;= texto.length&#40;&#41;-1; i++&#41; &#123;
+	    preto = Integer.parseInt&#40;String.valueOf&#40;texto.charAt&#40;i&#41;&#41;&#41;;
+	    branco = Integer.parseInt&#40;String.valueOf&#40;texto.charAt&#40;i+1&#41;&#41;&#41;;
+	    i++;
+	    for&#40;j = 0; j &lt; 5; j++&#41; &#123;
+	        if&#40;String.valueOf&#40;barras&#91;preto&#93;.charAt&#40;j&#41;&#41;.equals&#40;&quot;0&quot;&#41;&#41; &#123;
+	            fillRect&#40;tam, 0, tam + 1, h, 0&#41;;
+	            tam++;
+	        &#125;
+	        else &#123; fillRect&#40;tam, 0, tam + 3, h, 0&#41;;
+	            tam+=3;
+	        &#125;
+	        if&#40;String.valueOf&#40;barras&#91;branco&#93;.charAt&#40;j&#41;&#41;.equals&#40;&quot;0&quot;&#41;&#41; &#123;
+	            fillRect&#40;tam, 0, tam + 1, h, 0x00FFFFFF&#41;; tam++;
+	        &#125;
+	        else &#123;
+	            fillRect&#40;tam, 0, tam + 3, h, 0x00FFFFFF&#41;; tam += 3;
+	        &#125;
+	    &#125;
+	&#125;
+
+	//fim da barra = 0 = 10 / 1 = 0
+	fillRect&#40;tam, 0, tam+3, h, 0&#41;;
+	tam+=3;
+	fillRect&#40;tam, 0, tam+1, h, 0x00FFFFFF&#41;;
+	tam++;
+	fillRect&#40;tam, 0, tam+1, h, 0&#41;;
+	tam++;
+
+	JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder&#40;out&#41;;
+	encoder.encode&#40;image&#41;;
+	//GifEncoder encoder = new GifEncoder&#40;BarImage ,outb&#41;;
+	//encoder.encode&#40;&#41;;
+	// ESSAS DUAS LINHAS ACIMA CRIARIAM UM .gif
+	out.close&#40;&#41;;
+	return true; &#125;
+
+	void fillRect&#40;int x0, int y0, int x1, int y1, int color&#41;
+	&#123;
+	    for &#40;int x=x0 ; x &lt; x1 ; x++&#41;&#123;
+	      for &#40;int y=y0 ; y &lt; y1 ; y++&#41;&#123;
+	         image.setRGB&#40;x, y, color&#41;;
+	      &#125;
+	    &#125;
+	&#125;
+	&#125;
+
+
+}

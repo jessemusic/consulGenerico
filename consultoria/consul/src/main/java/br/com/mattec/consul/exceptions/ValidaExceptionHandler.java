@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javassist.tools.rmi.ObjectNotFoundException;
+
 @ControllerAdvice
 public class ValidaExceptionHandler {
 	
@@ -36,15 +38,6 @@ public class ValidaExceptionHandler {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
-	
-//	@ExceptionHandler(InvalidStateException.class)
-//	public ResponseEntity<StandardError> Validation(InvalidStateException e, HttpServletRequest request){
-//
-//		String error = "Erro no sistema!";
-//		HttpStatus status = HttpStatus.BAD_REQUEST;
-//		StandardError err = new StandardError(Instant.now(),status.value(), error, e.getMessage(), request.getRequestURI());
-//		return ResponseEntity.status(status).body(err);
-//	}
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<StandardError> Validation(HttpMessageNotReadableException e, HttpServletRequest request){
@@ -91,6 +84,16 @@ public class ValidaExceptionHandler {
 		StandardError err = new StandardError(Instant.now(),status.value(), error, "Opção do tipo inválida de cadastro de documentos", request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
+
+	@ExceptionHandler(ObjectNotFoundException.class)
+	public ResponseEntity<StandardError> Validation(ObjectNotFoundException e, HttpServletRequest request){
+
+		String error = "Erro no sistema!";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(),status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
 
 
 	

@@ -1,5 +1,0 @@
-package br.com.mattec.consul.controller.valida.exeptions;
-
-public class StandardError {
-
-}

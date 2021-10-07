@@ -3,19 +3,22 @@ package br.com.mattec.consul.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+@Builder
 @NoArgsConstructor
 @Entity
 public class ProdutoEntity implements Serializable{
@@ -30,14 +33,13 @@ public class ProdutoEntity implements Serializable{
 	private LocalDateTime dataDeCompra;
 	private LocalDateTime dataDeValidade;
 	
-	@ManyToMany
-	@JoinTable(name = "produto_categoria",
-	joinColumns = @JoinColumn(name = "produto_id"),
-	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-	private List<Categoria> categorias = new ArrayList<>();
+	@JsonManagedReference
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "categoria_id", nullable = false)
+	private Categoria categorias;
 	
 	public ProdutoEntity(Long id, String nome, BigDecimal preco, String codigoDeBarra, LocalDateTime dataDeCompra,
-			LocalDateTime dataDeValidade) {
+			LocalDateTime dataDeValidade, Categoria categorias) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,6 +47,7 @@ public class ProdutoEntity implements Serializable{
 		this.codigoDeBarra = codigoDeBarra;
 		this.dataDeCompra = dataDeCompra;
 		this.dataDeValidade = dataDeValidade;
+		this.categorias = categorias;
 	}
 	
 	
@@ -154,16 +157,18 @@ public class ProdutoEntity implements Serializable{
 
 
 
-	public List<Categoria> getCategorias() {
+	public Categoria getCategorias() {
 		return categorias;
 	}
 
 
 
 
-	public void setCategorias(List<Categoria> categorias) {
+	public void setCategorias(Categoria categorias) {
 		this.categorias = categorias;
 	}
+
+	
 
 
 }
