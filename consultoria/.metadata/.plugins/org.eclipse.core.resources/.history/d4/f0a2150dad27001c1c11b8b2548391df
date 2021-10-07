@@ -7,7 +7,6 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.Barcode39;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -26,8 +25,6 @@ public class CodigoBarras {
 			Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
 			
 			doc.add(img);
-			
-			doc.add(new Paragraph(" "));
 			
 			Barcode128 code128 = new Barcode128();
 			code128.setCode("1234567890");
