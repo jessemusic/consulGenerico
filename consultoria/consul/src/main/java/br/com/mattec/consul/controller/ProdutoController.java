@@ -38,8 +38,8 @@ public class ProdutoController {
 
 	}
 	
-	@PostMapping("/save")
-	public ResponseEntity<Void> save(@Valid @RequestBody ProdutoEntity obj) {
+	@PostMapping("/insert")
+	public ResponseEntity<Void> insert(@Valid @RequestBody ProdutoDto obj) {
 		this.service.insert(obj);
 		return ResponseEntity.ok().build();
 

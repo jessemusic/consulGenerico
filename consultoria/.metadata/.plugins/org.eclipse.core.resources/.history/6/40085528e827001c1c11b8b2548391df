@@ -42,7 +42,7 @@ public class CategoriaController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<Void> inserrt(@Valid @RequestBody Categoria obj) {
+	public ResponseEntity<Void> save(@Valid @RequestBody Categoria obj) {
 		this.service.insert(obj);
 		return ResponseEntity.ok().build();
 

@@ -50,17 +50,38 @@ public class ProdutoService {
 	}
 	
 	
-	public void insert(ProdutoDto cadDto) {
+	public void insert(ProdutoDto cadDto) throws ValidaException {
 		ProdutoEntity produto = ProdutoEntity.builder().nome(cadDto.getNome()).preco(cadDto.getPreco())
 				.codigoDeBarra(cadDto.getCodigoDeBarra())
 				.dataDeCompra(cadDto.getDataDeCompra()).dataDeValidade(cadDto.getDataDeValidade())
 				.build();
 		Categoria categoria = Categoria.builder().id(cadDto.getId()).build();
 		produto.setCategorias(categoria);
-		this.repoProduto.save(produto);
-		this.repoCategoria.save(categoria);
+		this.repoProduto.insert(produto);
+		this.repoCategoria.insert(categoria);
 		
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ProdutoEntity insert(ProdutoEntity categoria) {
+		return repoProduto.save(categoria);
+	}
+
+
 	
 	public Object findAllAndCategoria() {
 		return null;

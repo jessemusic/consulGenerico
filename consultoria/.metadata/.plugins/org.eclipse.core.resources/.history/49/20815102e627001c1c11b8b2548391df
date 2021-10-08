@@ -1,0 +1,18 @@
+package br.com.mattec.consul.reporitory;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import br.com.mattec.consul.entities.ProdutoEntity;
+
+@Repository
+public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Long> {
+
+	void insert(ProdutoEntity produto);
+
+	
+//	@Query("SELECT new br.com.mattec.consul.dto.ProdutoDto(p.nome, p.preco, p.codigoDeBarra, p.dataDeCompra,p.dataDeValidade "
+//			+ "ct.nomeCategoria) FROM ProdutoEntity p "
+//			+ "INNER JOIN Categoria ct ON p.categoria.id = ct.nome")
+//	Optional<List<ProdutoDto>> findAllById(ProdutoEntity produto);
+}

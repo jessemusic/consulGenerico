@@ -57,10 +57,17 @@ public class ProdutoService {
 				.build();
 		Categoria categoria = Categoria.builder().id(cadDto.getId()).build();
 		produto.setCategorias(categoria);
-		this.repoProduto.save(produto);
-		this.repoCategoria.save(categoria);
+		this.repoProduto.insert(produto);
+		this.repoCategoria.insert(categoria);
 		
 	}
+	
+
+	public ProdutoEntity insert(ProdutoEntity categoria) {
+		return repoProduto.save(categoria);
+	}
+
+
 	
 	public Object findAllAndCategoria() {
 		return null;
