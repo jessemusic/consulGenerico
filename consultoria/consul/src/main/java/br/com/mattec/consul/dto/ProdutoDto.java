@@ -19,8 +19,7 @@ public class ProdutoDto {
 	private String nome;
 	private BigDecimal preco;
 	private Integer codigoDeBarra;
-	private LocalDateTime dataDeCompra;
-	private LocalDateTime dataDeValidade;
+	private Integer quantidade;
 	private String categoria;
 
 }

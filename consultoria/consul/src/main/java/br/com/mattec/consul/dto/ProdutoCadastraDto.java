@@ -20,5 +20,4 @@ public class ProdutoCadastraDto implements Serializable{
 	private Integer quantidade;
 	private Long idCategoria;
 	
-
 }

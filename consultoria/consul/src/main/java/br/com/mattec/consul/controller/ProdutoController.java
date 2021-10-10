@@ -50,7 +50,5 @@ public class ProdutoController {
 		return ResponseEntity.ok().body(this.service.findCodigoDeBarra());
 
 	}
-	
-	
 
 }

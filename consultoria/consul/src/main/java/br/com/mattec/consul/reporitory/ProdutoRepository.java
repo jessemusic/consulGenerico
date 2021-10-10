@@ -10,7 +10,5 @@ import br.com.mattec.consul.entities.ProdutoEntity;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<ProdutoEntity, Long> {
-	
-
 	List<ProdutoEntity> findAllByOrderByCodigoDeBarraDesc();
 }
