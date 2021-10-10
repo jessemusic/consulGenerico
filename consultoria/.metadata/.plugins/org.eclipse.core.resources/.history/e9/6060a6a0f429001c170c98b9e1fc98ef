@@ -73,6 +73,7 @@ public class ProdutoService {
 
 	public List<ProdutoEntity> findCodigoDeBarra() {
 		List<ProdutoEntity> list = repoProduto.findAllByOrderByCodigoDeBarraDesc(); 
+		System.out.println(list.toString());
 		return list;
 	}
 }
