@@ -44,17 +44,5 @@ public class PedidoEntity implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private ClientEntity cliente;
-
-	public PedidoEntity(Long id, Integer numeroDoPedido, LocalDateTime dataDoPedido, Integer quantidadeDeItens,
-			ClientEntity cliente) {
-		super();
-		this.id = id;
-		this.numeroDoPedido = numeroDoPedido;
-		this.dataDoPedido = dataDoPedido;
-		this.quantidadeDeItens = quantidadeDeItens;
-		this.cliente = cliente;
-	}
-	
-	
 	
 }

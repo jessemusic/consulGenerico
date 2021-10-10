@@ -1,8 +1,20 @@
 package br.com.mattec.consul;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import br.com.mattec.consul.entities.Categoria;
+import br.com.mattec.consul.entities.ClientEntity;
+import br.com.mattec.consul.entities.PedidoEntity;
+import br.com.mattec.consul.entities.ProdutoEntity;
+import br.com.mattec.consul.reporitory.CategoriaRepository;
+import br.com.mattec.consul.reporitory.ProdutoRepository;
 
 @SpringBootApplication
 public class ConsulApplication implements CommandLineRunner {

@@ -1,0 +1,70 @@
+package br.com.mattec.consul;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import br.com.mattec.consul.entities.Categoria;
+import br.com.mattec.consul.entities.ClientEntity;
+import br.com.mattec.consul.entities.PedidoEntity;
+import br.com.mattec.consul.entities.ProdutoEntity;
+import br.com.mattec.consul.reporitory.CategoriaRepository;
+import br.com.mattec.consul.reporitory.ProdutoRepository;
+
+@SpringBootApplication
+public class ConsulApplication implements CommandLineRunner {
+
+	@Autowired
+	private CategoriaRepository catRep;
+	@Autowired
+	private ProdutoRepository proRep;
+
+	public static void main(String[] args) {
+		SpringApplication.run(ConsulApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		Categoria cat1 = new Categoria(null, "Informática");
+		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "Oléos lubrificantes automotivos");
+		Categoria cat4 = new Categoria(null, "Materiais para contruções");
+		ClientEntity cli1 = ClientEntity.builder().id(2l).build();
+		ClientEntity cli2 = ClientEntity.builder().id(1l).build();
+		ClientEntity cli3 = ClientEntity.builder().id(3l).build();
+		ClientEntity cli4 = ClientEntity.builder().id(4l).build();
+		
+		
+		PedidoEntity ped1 = new PedidoEntity(null,1,LocalDateTime.now(), 3,cli1);
+		PedidoEntity ped1 = new PedidoEntity(null,1,LocalDateTime.now(), 3,cli2);
+		PedidoEntity ped1 = new PedidoEntity(null,1,LocalDateTime.now(), 3,cli3);
+		PedidoEntity ped1 = new PedidoEntity(null,1,LocalDateTime.now(), 3,cli4);
+
+		ProdutoEntity p1 = new ProdutoEntity(null, 1, "Computador", new BigDecimal("2000.00"), 15, cat1,null);
+		ProdutoEntity p2 = new ProdutoEntity(null, 2, "RÉGUAS", new BigDecimal("10.00"), 100, cat2,null);
+		ProdutoEntity p3 = new ProdutoEntity(null, 3, "LUBRAZ", new BigDecimal("50.00"), 50, cat3,null);
+		ProdutoEntity p4 = new ProdutoEntity(null, 4, "LATA DE TINTA", new BigDecimal("90.00"), 40, cat4,null);
+		ProdutoEntity p5 = new ProdutoEntity(null, 5, "Mouse", new BigDecimal("30.00"), 20, cat1,null);
+		cat1.getProdutos().addAll(Arrays.asList(p1, p5));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat4.getProdutos().addAll(Arrays.asList(p4));
+		cat3.getProdutos().addAll(Arrays.asList(p3));
+
+		p1.getCategorias().getId();
+		p2.getCategorias().getId();
+		p3.getCategorias().getId();
+		p4.getCategorias().getId();
+		p5.getCategorias().getId();
+
+		catRep.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
+		proRep.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+	}
+
+}
