@@ -1,0 +1,20 @@
+package br.com.mattec.consul.entities;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.OneToOne;
+
+public class PedidoEntity {
+	
+	private Long id;
+	private Integer numeroDoPedido;
+	private LocalDateTime dataDoPedido;
+	private Integer quantidadeDeItens;
+	
+	private List<ProdutoEntity> produtoId;
+	
+	@OneToOne
+	private ClientEntity clienteId;
+	
+}

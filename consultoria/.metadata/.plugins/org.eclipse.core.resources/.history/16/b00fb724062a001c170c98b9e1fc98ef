@@ -1,7 +1,5 @@
 package br.com.mattec.consul.entities;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -62,9 +59,6 @@ public class ClientEntity {
 	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false)
 	 private EnderecoEntity endereco;
-	
-	@OneToMany(mappedBy ="cliente")
-	private List<PedidoEntity> pedidos;
 	
 	public ClientEntity(Long id,
 			@NotEmpty(message = "Preenchimento obrigatório") @Length(min = 5, max = 150, message = "O tamanho de ser entre 5 e 120 caracteres") String nome,

@@ -43,8 +43,7 @@ public class ProdutoEntity implements Serializable{
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categorias;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name = "pedido_id", nullable = false)
+	@ManyToOne
 	private PedidoEntity pedido;
 	
 

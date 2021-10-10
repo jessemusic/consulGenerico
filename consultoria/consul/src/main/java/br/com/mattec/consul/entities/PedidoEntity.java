@@ -1,7 +1,7 @@
 package br.com.mattec.consul.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -18,30 +21,28 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Entity
 @Builder
 @AllArgsConstructor
-@Data
-
 @NoArgsConstructor
-@Entity
-public class Categoria implements Serializable{
+@Data
+public class PedidoEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nomeDaCategoria;
+	private Integer numeroDoPedido;
+	private LocalDateTime dataDoPedido;
+	private Integer quantidadeDeItens;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "categorias",fetch = FetchType.LAZY,
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-	private List<ProdutoEntity> produtos = new ArrayList<>();
-
-	public Categoria(Long id, String nomeDaCategoria) {
-		super();
-		this.id = id;
-		this.nomeDaCategoria = nomeDaCategoria;
-	}
-
+	private List<ProdutoEntity> produtoId;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private ClientEntity cliente;
 	
 }

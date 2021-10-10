@@ -1,0 +1,34 @@
+package br.com.mattec.consul.entities;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Builder;
+import lombok.Data;
+@Entity
+@Builder
+@Data
+public class PedidoEntity {
+	
+	private Long id;
+	private Integer numeroDoPedido;
+	private LocalDateTime dataDoPedido;
+	private Integer quantidadeDeItens;
+	
+	@JsonBackReference
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	private List<ProdutoEntity> produtoId;
+	
+	@OneToOne
+	private ClientEntity clienteId;
+	
+}
