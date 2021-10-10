@@ -7,13 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.mattec.consul.dto.CadastraDto;
+import br.com.mattec.consul.dto.ProdutoCadastraDto;
 import br.com.mattec.consul.dto.ProdutoDto;
 import br.com.mattec.consul.entities.Categoria;
-import br.com.mattec.consul.entities.ClientEntity;
-import br.com.mattec.consul.entities.EnderecoEntity;
 import br.com.mattec.consul.entities.ProdutoEntity;
-import br.com.mattec.consul.exceptions.ValidaException;
 import br.com.mattec.consul.reporitory.CategoriaRepository;
 import br.com.mattec.consul.reporitory.ProdutoRepository;
 
@@ -27,6 +24,7 @@ public class ProdutoService {
 	private CategoriaRepository repoCategoria;
 	
 	
+	
 	public List<ProdutoDto> findAll(){
 		List<ProdutoEntity> produtoEntities = this.repoProduto.findAll();
 		
@@ -38,27 +36,28 @@ public class ProdutoService {
 			produtoDto.setNome(pro.getNome());
 			produtoDto.setPreco(pro.getPreco());
 			produtoDto.setCodigoDeBarra(pro.getCodigoDeBarra());
-			produtoDto.setDataDeCompra(pro.getDataDeCompra());
-			produtoDto.setDataDeValidade(pro.getDataDeValidade());
-			produtoDto.setNomeCategoria(pro.getCategorias().getNomeDaCategoria());
+			produtoDto.setCategoria(pro.getNome());
 			
 			listProduto.add(produtoDto);
 		});
-		
-		
+			
 		return listProduto;
 	}
 	
 	
-	public void insert(ProdutoDto cadDto) {
-		ProdutoEntity produto = ProdutoEntity.builder().nome(cadDto.getNome()).preco(cadDto.getPreco())
-				.codigoDeBarra(cadDto.getCodigoDeBarra())
-				.dataDeCompra(cadDto.getDataDeCompra()).dataDeValidade(cadDto.getDataDeValidade())
+	public void insert(ProdutoCadastraDto cadDto) {
+		Optional<Categoria> pegaId =repoCategoria.findById(cadDto.getIdCategoria());
+		ProdutoEntity produto = ProdutoEntity.builder()
+				.nome(cadDto.getNome())
+				.preco(cadDto.getPreco())
+				.quantidade(cadDto.getQuantidade())
+				.codigoDeBarra(geraCodigoDeBarras().getCodigoDeBarra() +1)
 				.build();
-		Categoria categoria = Categoria.builder().id(cadDto.getId()).build();
-		produto.setCategorias(categoria);
-		this.repoProduto.save(produto);
-		this.repoCategoria.save(categoria);
+		
+		if(pegaId.isPresent()) {
+			produto.setCategorias(pegaId.get());
+			this.repoProduto.save(produto);
+		}
 		
 	}
 	
@@ -66,9 +65,15 @@ public class ProdutoService {
 		return null;
 	}
 	
-	
-	
+	private ProdutoEntity geraCodigoDeBarras() {
+	List<ProdutoEntity> codigoDeBarra = findCodigoDeBarra();
+		return codigoDeBarra.get(0);
+	}
 
 
-
+	public List<ProdutoEntity> findCodigoDeBarra() {
+		List<ProdutoEntity> list = repoProduto.findAllByOrderByCodigoDeBarraDesc(); 
+		System.out.println(list.toString());
+		return list;
+	}
 }

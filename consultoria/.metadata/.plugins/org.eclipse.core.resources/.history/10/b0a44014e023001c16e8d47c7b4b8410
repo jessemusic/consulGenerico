@@ -1,5 +1,0 @@
-package br.com.mattec.consul.entities.enums;
-
-public enum TipoClient {
-
-}

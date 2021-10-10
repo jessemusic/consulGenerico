@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConsulApplication implements CommandLineRunner{
-	
+public class ConsulApplication implements CommandLineRunner {
+
 //	@Autowired
 //	private CategoriaRepository catRep;
 //	@Autowired
@@ -18,38 +18,30 @@ public class ConsulApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-//		
+
 //		Categoria cat1 = new Categoria(null, "Informática");
 //		Categoria cat2 = new Categoria(null, "Escritório");
 //		Categoria cat3 = new Categoria(null, "Oléos lubrificantes automotivos");
 //		Categoria cat4 = new Categoria(null, "Materiais para contruções");
-//		
-//		
-//		ProdutoEntity p1 = new ProdutoEntity(null, "Computador", new BigDecimal("2000.00"),
-//				null,LocalDateTime.now(),LocalDateTime.now().plusDays(1).plusMonths(10).plusHours(2),
-//				cat1);
-//		ProdutoEntity p2 = new ProdutoEntity(null, "RÉGUAS",  new BigDecimal("10.00"), null,
-//				LocalDateTime.now(), LocalDateTime.now().plusDays(1).plusMonths(4).plusHours(2),cat2);
-//		ProdutoEntity p3 = new ProdutoEntity(null, "LUBRAZ",  new BigDecimal("50.00"), null,
-//				LocalDateTime.now().plusMonths(-10), LocalDateTime.now().plusDays(1).plusMonths(12).plusHours(2),cat3);
-//		ProdutoEntity p4 = new ProdutoEntity(null, "LATA DE TINTA", new BigDecimal("90.00"), null,
-//				LocalDateTime.now().plusMonths(-2), LocalDateTime.now().plusDays(1).plusMonths(1).plusHours(2),cat4);
-//		ProdutoEntity p5 = new ProdutoEntity(null, "Mouse", new BigDecimal("30.00"), null,
-//				LocalDateTime.now(), LocalDateTime.now().plusDays(12).plusMonths(5).plusHours(2), cat1);
-//		cat1.getProdutos().addAll(Arrays.asList(p1,p5));
+//
+//		ProdutoEntity p1 = new ProdutoEntity(null, 1, "Computador", new BigDecimal("2000.00"), 15, cat1);
+//		ProdutoEntity p2 = new ProdutoEntity(null, 2, "RÉGUAS", new BigDecimal("10.00"), 100, cat2);
+//		ProdutoEntity p3 = new ProdutoEntity(null, 3, "LUBRAZ", new BigDecimal("50.00"), 50, cat3);
+//		ProdutoEntity p4 = new ProdutoEntity(null, 4, "LATA DE TINTA", new BigDecimal("90.00"), 40, cat4);
+//		ProdutoEntity p5 = new ProdutoEntity(null, 5, "Mouse", new BigDecimal("30.00"), 20, cat1);
+//		cat1.getProdutos().addAll(Arrays.asList(p1, p5));
 //		cat2.getProdutos().addAll(Arrays.asList(p2));
 //		cat4.getProdutos().addAll(Arrays.asList(p4));
 //		cat3.getProdutos().addAll(Arrays.asList(p3));
-//		
+//
 //		p1.getCategorias().getId();
 //		p2.getCategorias().getId();
 //		p3.getCategorias().getId();
 //		p4.getCategorias().getId();
 //		p5.getCategorias().getId();
-//	
-//		
-//		catRep.saveAll(Arrays.asList(cat1, cat2,cat3,cat4));
-//		proRep.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+//
+//		catRep.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
+//		proRep.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 	}
 

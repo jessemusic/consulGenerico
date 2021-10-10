@@ -1,5 +1,0 @@
-package br.com.mattec.consul.controller.exceptions;
-
-public class ValidationError extends StandardError {
-
-}

@@ -1,28 +1,26 @@
 package br.com.mattec.consul.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import br.com.mattec.consul.entities.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Builder
 @AllArgsConstructor
-@Data
-public class ProdutoDto implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+@NoArgsConstructor
+@Getter
+@Setter
+public class ProdutoDto {
+	
 	private Long id;
 	private String nome;
 	private BigDecimal preco;
-	private String codigoDeBarra;
+	private Integer codigoDeBarra;
 	private LocalDateTime dataDeCompra;
 	private LocalDateTime dataDeValidade;
-	private String nomeCategoria;
-	
-	
-	
+	private String categoria;
 
 }
