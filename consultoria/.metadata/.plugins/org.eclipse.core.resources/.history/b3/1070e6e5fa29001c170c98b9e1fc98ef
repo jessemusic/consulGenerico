@@ -37,7 +37,7 @@ public class ProdutoService {
 			produtoDto.setPreco(pro.getPreco());
 			produtoDto.setCodigoDeBarra(pro.getCodigoDeBarra());
 			produtoDto.setQuantidade(pro.getQuantidade());
-			produtoDto.setCategoria(pro.getCategorias().getNomeDaCategoria());
+			produtoDto.setCategoria(pro.getNome());
 			
 			listProduto.add(produtoDto);
 		});
