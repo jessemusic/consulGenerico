@@ -10,11 +10,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Produto"/>
+		<item key="selection" value="Pedido"/>
 		<list key="findhistory">
+			<item value="Produto"/>
 			<item value="Categoria"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Pedido"/>
 			<item value="Produto"/>
 			<item value="ProdutoEntity"/>
 		</list>

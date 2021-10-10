@@ -1,0 +1,79 @@
+package br.com.mattec.consul.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.mattec.consul.dto.PedidoCadastraDto;
+import br.com.mattec.consul.dto.PedidoDto;
+import br.com.mattec.consul.entities.Categoria;
+import br.com.mattec.consul.entities.PedidoEntity;
+import br.com.mattec.consul.reporitory.CategoriaRepository;
+import br.com.mattec.consul.reporitory.PedidoRepository;
+
+@Service
+public class PedidoService {
+
+	@Autowired
+	private PedidoRepository repoPedido;
+	
+	@Autowired
+	private CategoriaRepository repoCategoria;
+	
+	
+	
+	public List<PedidoDto> findAll(){
+		List<PedidoEntity> produtoEntities = this.repoPedido.findAll();
+		
+		List<PedidoDto> listPedido = new ArrayList<>();
+		
+		produtoEntities.forEach(pro -> {
+			PedidoDto produtoDto = PedidoDto.builder().build();
+			produtoDto.setId(pro.getId());
+			produtoDto.setNome(pro.getNome());
+			produtoDto.setPreco(pro.getPreco());
+			produtoDto.setCodigoDeBarra(pro.getCodigoDeBarra());
+			produtoDto.setQuantidade(pro.getQuantidade());
+			produtoDto.setCategoria(pro.getCategorias().getNomeDaCategoria());
+			
+			listPedido.add(produtoDto);
+		});
+			
+		return listPedido;
+	}
+	
+	
+	public void insert(PedidoCadastraDto cadDto) {
+		Optional<Categoria> pegaId =repoCategoria.findById(cadDto.getIdCategoria());
+		PedidoEntity produto = PedidoEntity.builder()
+				.nome(cadDto.getNome())
+				.preco(cadDto.getPreco())
+				.quantidade(cadDto.getQuantidade())
+				.codigoDeBarra(geraCodigoDeBarras().getCodigoDeBarra() +1)
+				.build();
+		
+		if(pegaId.isPresent()) {
+			produto.setCategorias(pegaId.get());
+			this.repoPedido.save(produto);
+		}
+		
+	}
+	
+	public Object findAllAndCategoria() {
+		return null;
+	}
+	
+	private PedidoEntity geraCodigoDeBarras() {
+	List<PedidoEntity> codigoDeBarra = findCodigoDeBarra();
+		return codigoDeBarra.get(0);
+	}
+
+
+	public List<PedidoEntity> findCodigoDeBarra() {
+		List<PedidoEntity> list = repoPedido.findAllByOrderByCodigoDeBarraDesc(); 
+		return list;
+	}
+}
