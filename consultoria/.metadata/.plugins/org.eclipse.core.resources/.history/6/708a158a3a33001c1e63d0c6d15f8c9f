@@ -1,0 +1,16 @@
+server.port=8081
+client.cep.url = http://viacep.com.br/ws/
+
+#---------Acesso ao Banco de dados--------------
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe?createDatabaseIfNotExist=true&useSSL=false
+
+spring.datasource.username="system"
+spring.datasource.password=""
+spring.jpa.hibernate.ddl-auto=update
+
+## Hibernate Properties
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+# Log JPA queries
+# Comment this in production
+spring.jpa.show-sql=true

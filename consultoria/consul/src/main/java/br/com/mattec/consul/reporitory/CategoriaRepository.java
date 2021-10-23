@@ -7,5 +7,4 @@ import br.com.mattec.consul.entities.Categoria;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-
 }

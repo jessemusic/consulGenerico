@@ -1,5 +1,0 @@
-package br.com.mattec.consul.dto;
-
-public class ClienteDto {
-
-}
