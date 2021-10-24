@@ -7,11 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ConsulApplication implements CommandLineRunner {
 
-//	@Autowired
-//	private CategoriaRepository catRep;
-//	@Autowired
-//	private ProdutoRepository proRep;
-
 	public static void main(String[] args) {
 		SpringApplication.run(ConsulApplication.class, args);
 	}
@@ -46,6 +41,7 @@ public class ConsulApplication implements CommandLineRunner {
 //		cat4.getProdutos().addAll(Arrays.asList(p4));
 //		cat3.getProdutos().addAll(Arrays.asList(p3));
 //
+//	
 //		p1.getCategorias().getId();
 //		p2.getCategorias().getId();
 //		p3.getCategorias().getId();

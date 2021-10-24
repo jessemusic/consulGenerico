@@ -1,0 +1,29 @@
+server.port=8081
+client.cep.url = http://viacep.com.br/ws/
+
+spring.main.banner-mode=off
+
+# create and drop tables and sequences, loads import.sql
+spring.jpa.hibernate.ddl-auto=update
+
+# Oracle settings
+spring.datasource.url=jdbc:oracle:thin:@//localhost:1521/xe
+spring.datasource.username=consul
+spring.datasource.password=consul
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+
+#spring.jpa.database-platform=org.hibernate.dialect.Oracle10gDialect 
+
+# HikariCP settings
+# spring.datasource.hikari.*
+# HikariCP settings
+spring.datasource.hikari.minimumIdle=5
+spring.datasource.hikari.maximumPoolSize=20
+spring.datasource.hikari.idleTimeout=30000
+spring.datasource.hikari.maxLifetime=2000000
+spring.datasource.hikari.connectionTimeout=30000
+spring.datasource.hikari.poolName=HikariPoolBooks
+
+# JPA settings
+spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect
+spring.jpa.hibernate.use-new-id-generator-mappings=false

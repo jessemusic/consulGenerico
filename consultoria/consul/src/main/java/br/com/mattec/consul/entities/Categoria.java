@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,9 +31,12 @@ public class Categoria implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	
 	private String nomeDaCategoria;
 	
-	@JsonBackReference
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "categorias",fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
 	private List<ProdutoEntity> produtos = new ArrayList<>();

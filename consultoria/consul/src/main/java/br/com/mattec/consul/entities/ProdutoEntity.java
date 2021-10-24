@@ -39,7 +39,7 @@ public class ProdutoEntity implements Serializable{
 	private Integer quantidade;
 	
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categorias;
